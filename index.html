@@ -19,7 +19,7 @@
   </head>
   <body>
     <h1>1 Generator--∞ Upgrades</h1>
-    <h2>Naruyoko--0.0.0</h2>
+    <h2>Naruyoko--0.1.0</h2>
     <p id="top">
       Currency: <span id="currency">0</span><br>
       Currency per second: <span id="currencyPerSecond">0</span>
@@ -35,7 +35,12 @@
       <button id="buyGenerator" onclick="buyGenerator()">Buy a generator</button>
     </p>
     <p id="upgrades">
-      Make generators 10% stronger (<span id="strongerGeneratorsNum">0</span> bought) for <span id="strongerGeneratorsCost">0</span> <button id="strongerGenerators" onclick="buyUpgrade(event)">Buy</button> <button id="strongerGeneratorsMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button>
+      <span id="strongerGenerators">sg1 Make generators 10% stronger (<span id="strongerGeneratorsNum">0</span> bought) for <span id="strongerGeneratorsCost">0</span> <button id="strongerGeneratorsBuy" onclick="buyUpgrade(event)">Buy</button> <button id="strongerGeneratorsMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button></span><br>
+      <span id="strongerGenerators2" class="hidden">sg2 Make generators 15% stronger (<span id="strongerGenerators2Num">0</span> bought) for <span id="strongerGenerators2Cost">0</span> <button id="strongerGenerators2Buy" onclick="buyUpgrade(event)">Buy</button> <button id="strongerGenerators2Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button></span><br>
+      <span id="strongerGenerators3" class="hidden">sg3 Make generators 30% stronger (<span id="strongerGenerators3Num">0</span> bought) for <span id="strongerGenerators3Cost">0</span> <button id="strongerGenerators3Buy" onclick="buyUpgrade(event)">Buy</button> <button id="strongerGenerators3Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button></span><br>
+      <span id="strongerGenerators4" class="hidden">sg4 Make generators <span id="strongerGenerators4Eff">5</span>% stronger for each level of upgrade sg3 (<span id="strongerGenerators4Num">0</span> bought) for <span id="strongerGenerators4Cost">0</span> <button id="strongerGenerators4Buy" onclick="buyUpgrade(event)">Buy</button> <button id="strongerGenerators4Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button></span><br>
+      <span id="cheaperUpgrades" class="hidden">cu1 Make upgrades above 5% cheaper (<span id="cheaperUpgradesNum">0</span> bought) for <span id="cheaperUpgradesCost">0</span> <button id="cheaperUpgradesBuy" onclick="buyUpgrade(event)">Buy</button> <button id="cheaperUpgradesMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button></span><br>
+      <span id="strongerGenerators5" class="hidden">sg5 Make upgrade sg4 7% stronger (<span id="strongerGenerators5Num">0</span> bought) for <span id="strongerGenerators5Cost">0</span> <button id="strongerGenerators5Buy" onclick="buyUpgrade(event)">Buy</button> <button id="strongerGenerators5Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button></span>
     </p>
     <p id="options">
       <button onclick="save()">Manually save</button>
