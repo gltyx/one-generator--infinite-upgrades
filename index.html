@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="./ExpantaNum.js"></script>
+    <script src="./script.js"></script>
+    <style>
+      * {
+        font-family: "Consolas", monospace;
+        max-height: 999999px;
+      }
+      .hidden {
+        display: none;
+      }
+      .unavailable {
+        color: red;
+        opacity: 0.7;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>1 Generator--∞ Upgrades</h1>
+    <h2>Naruyoko--0.0.0</h2>
+    <p id="top">
+      Currency: <span id="currency">0</span><br>
+      Currency per second: <span id="currencyPerSecond">0</span>
+    </p>
+    <p id="tabs" class="hidden">
+      <button id="tabs.main" onclick="changeScreen(event)">Main</button>
+      <button id="tabs.upgrades" onclick="changeScreen(event)">Upgrades</button>
+      <button id="tabs.options" onclick="changeScreen(event)">Options</button>
+    </p>
+    <p id="main">
+      Generators: <span id="generators">0</span><br>
+      Generator cost: <span id="generatorCost">0</span><br>
+      <button id="buyGenerator" onclick="buyGenerator()">Buy a generator</button>
+    </p>
+    <p id="upgrades">
+      Make generators 10% stronger (<span id="strongerGeneratorsNum">0</span> bought) for <span id="strongerGeneratorsCost">0</span> <button id="strongerGenerators" onclick="buyUpgrade(event)">Buy</button> <button id="strongerGeneratorsMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button>
+    </p>
+    <p id="options">
+      <button onclick="save()">Manually save</button>
+      <button onclick="wipe()">Wipe save</button>
+    </p>
+  </body>
+</html>
