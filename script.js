@@ -533,8 +533,8 @@ function N(x){
   var r=x.toPrecision(6,true);
   for (var i=0;i<r.length;i++){
     if ("0123456789.".indexOf(r[i])!=-1){
-      for (var j=i+1;j<r.length;j++){
-        if ("0123456789.".indexOf(r[j])==-1||j==r.length-1){
+      for (var j=i+1;j<=r.length;j++){
+        if ("0123456789.".indexOf(r[j])==-1||j==r.length){
           var s=r.substring(i,j);
           var n=String(Number(s));
           r=r.substring(0,i)+n+r.substring(j);
