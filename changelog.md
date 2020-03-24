@@ -1,3 +1,7 @@
+# 0.1.5 - 2020/03/23
+* Fixed number formatting
+* Fixed `NaN` currency per second
+
 # 0.1.4 - 2020/03/23
 * Added `sg12`, `ab2`, `sg13`, `cu4`, and `cu5`
 * Reduced number of digits displayed

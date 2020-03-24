@@ -140,7 +140,7 @@ function getCurrencyPerSecond(){
   }else{
     r=r.mul(ExpantaNum.pow(2.5,game.upgrades.strongerGenerators9));
   }
-  r=r.mul(ExpantaNum.TWO.pow(game.upgrades.strongerGenerators8.logBase(ExpantaNum.TWO).mul(game.upgrades.strongerGenerators9.logBase(ExpantaNum.TWO)).mul(game.upgrades.strongerGenerators12)));
+  r=r.mul(ExpantaNum.TWO.pow(game.upgrades.strongerGenerators8.max(ExpantaNum.ONE).logBase(ExpantaNum.TWO).mul(game.upgrades.strongerGenerators9.max(ExpantaNum.ONE).logBase(ExpantaNum.TWO)).mul(game.upgrades.strongerGenerators12)));
   return r;
 }
 function getGeneratorCost(){
@@ -531,7 +531,19 @@ function autoBuy(){
 }
 function N(x){
   var r=x.toPrecision(6,true);
-  if (r.indexOf(".")!=-1) r=r.replace(/0*$/,"");
+  for (var i=0;i<r.length;i++){
+    if ("0123456789.".indexOf(r[i])!=-1){
+      for (var j=i+1;j<r.length;j++){
+        if ("0123456789.".indexOf(r[j])==-1||j==r.length-1){
+          var s=r.substring(i,j);
+          var n=String(Number(s));
+          r=r.substring(0,i)+n+r.substring(j);
+          i=i+n.length;
+          break;
+        }
+      }
+    }
+  }
   return r;
 }
 function updateDisplay(){
