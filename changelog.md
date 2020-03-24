@@ -1,3 +1,7 @@
+# 0.1.4 - 2020/03/23
+* Added `sg12`, `ab2`, `sg13`, `cu4`, and `cu5`
+* Reduced number of digits displayed
+
 # 0.1.3 - 2020/03/22
 * Added `cu2`, `sg8`, `sg9`, `sg10`, `cu3`, and `sg11`
 
