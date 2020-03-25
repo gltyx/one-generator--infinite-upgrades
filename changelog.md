@@ -1,3 +1,7 @@
+# 0.1.6 - 2020/03/24
+* Added `sg14`, `sg15`, `sg16`, and `cu6`
+* Added export/import save
+
 # 0.1.5 - 2020/03/23
 * Fixed number formatting
 * Fixed `NaN` currency per second
