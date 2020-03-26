@@ -51,7 +51,12 @@ var game={
     strongerGenerators14:ExpantaNum.ZERO.clone(),
     strongerGenerators15:ExpantaNum.ZERO.clone(),
     strongerGenerators16:ExpantaNum.ZERO.clone(),
-    cheaperUpgrades6:ExpantaNum.ZERO.clone()
+    cheaperUpgrades6:ExpantaNum.ZERO.clone(),
+    strongerGenerators17:ExpantaNum.ZERO.clone(),
+    strongerGenerators18:ExpantaNum.ZERO.clone(),
+    cheaperUpgrades7:ExpantaNum.ZERO.clone(),
+    strongerGenerators19:ExpantaNum.ZERO.clone(),
+    cheaperUpgrades8:ExpantaNum.ZERO.clone()
   },
   lasttime:new Date().getTime(),
   offlinetime:0,
@@ -133,8 +138,9 @@ function removeMaxUpgradeCostCache(names){
 }
 function getCurrencyPerSecond(){
   var r=game.generators;
-  r=r.mul(ExpantaNum.pow(1.1,game.upgrades.strongerGenerators));
-  r=r.mul(ExpantaNum.pow(1.15,game.upgrades.strongerGenerators2));
+  //If you think this multiplier should be in form (X*Y^Q)^P instead of current X^(P*Y^Q), DIY.
+  r=r.mul(ExpantaNum.pow(1.1,game.upgrades.strongerGenerators.mul(ExpantaNum.pow(1.05,game.upgrades.strongerGenerators17))));
+  r=r.mul(ExpantaNum.pow(1.15,game.upgrades.strongerGenerators2.mul(ExpantaNum.pow(1.05,game.upgrades.strongerGenerators18))));
   r=r.mul(ExpantaNum.pow(1.3,game.upgrades.strongerGenerators3.mul(ExpantaNum.pow(1.07,game.upgrades.strongerGenerators5))));
   r=r.mul(ExpantaNum.pow(1.05,game.upgrades.strongerGenerators3.mul(game.upgrades.strongerGenerators4)));
   r=r.mul(ExpantaNum.pow(1.4,game.upgrades.strongerGenerators6.mul(ExpantaNum.pow(1.17,game.upgrades.strongerGenerators10.mul(ExpantaNum.pow(1.06,game.upgrades.strongerGenerators13))))));
@@ -148,6 +154,7 @@ function getCurrencyPerSecond(){
   r=r.mul(ExpantaNum.pow(5,game.upgrades.strongerGenerators14));
   r=r.mul(ExpantaNum.pow(1.04,game.upgrades.strongerGenerators14.pow(2).mul(game.upgrades.strongerGenerators15)));
   r=r.mul(ExpantaNum.pow(2.75,game.upgrades.strongerGenerators10.mul(game.upgrades.strongerGenerators16)));
+  r=r.mul(ExpantaNum.pow(10,game.upgrades.strongerGenerators19.pow(5)));
   return r;
 }
 function getGeneratorCost(){
@@ -393,6 +400,38 @@ function getUpgradeCostFactor(name){
         }
       }
     };
+  }else if (name=="strongerGenerators17"){
+    returnValue={
+      type:"list",
+      list:[ExpantaNum("1e17295"),ExpantaNum("1e18572"),ExpantaNum("1e19223"),ExpantaNum("1e23592"),ExpantaNum("1e34307"),ExpantaNum("1e86474"),ExpantaNum("1e95385"),ExpantaNum("1e170000"),ExpantaNum("1e936000"),ExpantaNum("e1e6"),ExpantaNum("e1.248e6"),ExpantaNum("e4.61996e6")]
+    };
+  }else if (name=="strongerGenerators18"){
+    returnValue={
+      type:"list",
+      list:[ExpantaNum("3e33222"),ExpantaNum("1e35894"),ExpantaNum("1e49683"),ExpantaNum("1e100000"),ExpantaNum("1e232456"),ExpantaNum("1e589500"),ExpantaNum("e1.455e6"),ExpantaNum("e2.107e6"),ExpantaNum("e2.3e6"),ExpantaNum("e2.706e6"),ExpantaNum("e5.758e6"),ExpantaNum("e1.186e7")]
+    };
+  }else if (name=="cheaperUpgrades7"){
+    returnValue={
+      type:"list",
+      list:[ExpantaNum("1e25000"),ExpantaNum("1e30000"),ExpantaNum("1e580000"),ExpantaNum("e2.04748e7")]
+    };
+  }else if (name=="strongerGenerators19"){
+    returnValue={
+      type:"doubleExponentiatedPolynomial",
+      base:ExpantaNum("1e50000"),
+      exponent:{
+        base:ExpantaNum(1e100),
+        exponent:{
+          base:ExpantaNum(1.6),
+          power:ExpantaNum(1.6)
+        }
+      }
+    };
+  }else if (name=="cheaperUpgrades8"){
+    returnValue={
+      type:"once",
+      cost:ExpantaNum("1e247000")
+    };
   }
   cache.upgradeCostFactor[name]=returnValue;
   return returnValue;
@@ -405,8 +444,11 @@ function getUpgradeCost(name,offset,noreduction){
   var factors=getUpgradeCostFactor(name);
   var num=game.upgrades[name].add(offset);
   var returnValue;
+  //slower scaling
   if (name=="strongerGenerators7"&&!noreduction.includes("cheaperUpgrades2")) num=num.div(ExpantaNum.pow(1.1,game.upgrades.cheaperUpgrades2));
   if (["strongerGenerators14","strongerGenerators15","strongerGenerators16"].includes(name)&&!noreduction.includes("cheaperUpgrades6")) num=num.div(ExpantaNum.pow(1.2,game.upgrades.cheaperUpgrades6));
+  if (name=="cheaperUpgrades4"&&!noreduction.includes("cheaperUpgrades7")) num=num.div(ExpantaNum.pow(1.3,game.upgrades.cheaperUpgrades7));
+  if (name=="strongerGenerators19"&&!noreduction.includes("cheaperUpgrades8")) num=num.div(ExpantaNum.pow(1.3,game.upgrades.cheaperUpgrades8));
   if (factors.type=="exponential"){
     returnValue=factors.base.mul(factors.exponent.pow(num));
   }else if (factors.type=="doubleGeometric"){
@@ -435,6 +477,7 @@ function getMaxUpgradeAmount(name){
     returnValue=ExpantaNum.ZERO.clone();
   }else{
     var effectiveCurrency=game.currency;
+    //percent cheaper
     if (["strongerGenerators","strongerGenerators2","strongerGenerators3","strongerGenerators4"].includes(name)) effectiveCurrency=effectiveCurrency.mul(ExpantaNum.pow(1.05,game.upgrades.cheaperUpgrades));
     if (game.upgrades.cheaperUpgrades5.gte(ExpantaNum.ONE)&&["strongerGenerators5","strongerGenerators6","strongerGenerators7"].includes(name)) effectiveCurrency=effectiveCurrency.mul(ExpantaNum.pow(1.05,game.upgrades.cheaperUpgrades));
     if (["strongerGenerators","strongerGenerators2","strongerGenerators3","strongerGenerators4","cheaperUpgrades","strongerGenerators5","strongerGenerators6","strongerGenerators7","cheaperUpgrades2","strongerGenerators8","strongerGenerators9","strongerGenerators10"].includes(name)) effectiveCurrency=effectiveCurrency.mul(ExpantaNum.pow(1.08,game.upgrades.cheaperUpgrades3.mul(ExpantaNum.pow(1.5,game.upgrades.cheaperUpgrades4))));
@@ -469,11 +512,16 @@ function getMaxUpgradeAmount(name){
         t.d=factors.exponent.exponent.power;
         upperbound=t.x.div(t.a).log().div(t.b.log()).log().div(t.c.log()).root(t.d); //https://www.wolframalpha.com/input/?i=x%3Da*b%5Ec%5Ek%5Ed+solve+for+k&lang=ja
       }else if (factors.type=="list"){
-        upperbound=factors.list.length-game.upgrades[name].array[0][1];
+        upperbound=ExpantaNum(factors.list.length-game.upgrades[name].array[0][1]);
       }
+      //slower scaling
+      if (name=="strongerGenerators7") upperbound=upperbound.mul(ExpantaNum.pow(1.1,game.upgrades.cheaperUpgrades2));
+      if (["strongerGenerators14","strongerGenerators15","strongerGenerators16"].includes(name)) upperbound=upperbound.mul(ExpantaNum.pow(1.2,game.upgrades.cheaperUpgrades6));
+      if (name=="cheaperUpgrades4") upperbound=upperbound.mul(ExpantaNum.pow(1.3,game.upgrades.cheaperUpgrades7));
+      if (name=="strongerGenerators19") upperbound=upperbound.mul(ExpantaNum.pow(1.3,game.upgrades.cheaperUpgrades8));
       t=null;
       upperbound=upperbound.ceil();
-      if (effectiveCurrency.gte(getMaxUpgradeCost(name,upperbound))) return upperbound;
+      if (effectiveCurrency.gte(getMaxUpgradeCost(name,upperbound,["cheaperUpgrades","cheaperUpgrades3"]))) return upperbound;
       var lowerbound=ExpantaNum.ZERO.clone();
       while (true){
         var test=lowerbound.add(upperbound).div(ExpantaNum.TWO).floor();
@@ -481,7 +529,7 @@ function getMaxUpgradeAmount(name){
           returnValue=lowerbound;
           break;
         }
-        var sum=getMaxUpgradeCost(name,test);
+        var sum=getMaxUpgradeCost(name,test,["cheaperUpgrades","cheaperUpgrades3"]);
         var cmp=effectiveCurrency.cmp(sum);
         if (cmp===0){ //eq
           returnValue=test;
@@ -517,15 +565,23 @@ function getMaxUpgradeCost(name,numOverride,noreduction){
     }else{
       var sum=ExpantaNum.ZERO.clone();
       var numOverride=numOverride.sub(ExpantaNum.ONE);
+      var lastCost=ExpantaNum.NaN;
       while (numOverride.gte(ExpantaNum.ZERO)){
-        var newSum=sum.add(getUpgradeCost(name,numOverride,["cheaperUpgrades","cheaperUpgrades3"]));
+        var cost=getUpgradeCost(name,numOverride,["cheaperUpgrades","cheaperUpgrades3"]);
+        if (cost.eq(lastCost)){
+          sum.add(cost.mul(numOverride));
+          break;
+        }
+        var newSum=sum.add(cost);
         if (newSum.eq(sum)) break;
         sum=newSum;
+        lastCost=cost;
         numOverride=numOverride.sub(ExpantaNum.ONE);
       }
       returnValue=sum;
     }
   }
+  //percent cheaper
   if (["strongerGenerators","strongerGenerators2","strongerGenerators3","strongerGenerators4"].includes(name)&&!noreduction.includes("cheaperUpgrades")) returnValue=returnValue.div(ExpantaNum.pow(1.05,game.upgrades.cheaperUpgrades));
   if (game.upgrades.cheaperUpgrades5.gte(ExpantaNum.ONE)&&["strongerGenerators5","strongerGenerators6","strongerGenerators7"].includes(name)&&!noreduction.includes("cheaperUpgrades")) returnValue=returnValue.div(ExpantaNum.pow(1.05,game.upgrades.cheaperUpgrades));
   if (["strongerGenerators","strongerGenerators2","strongerGenerators3","strongerGenerators4","cheaperUpgrades","strongerGenerators5","strongerGenerators6","strongerGenerators7","cheaperUpgrades2","strongerGenerators8","strongerGenerators9","strongerGenerators10"].includes(name)&&!noreduction.includes("cheaperUpgrades3")) returnValue=returnValue.div(ExpantaNum.pow(1.08,game.upgrades.cheaperUpgrades3.mul(ExpantaNum.pow(1.5,game.upgrades.cheaperUpgrades4))));
@@ -533,14 +589,17 @@ function getMaxUpgradeCost(name,numOverride,noreduction){
   return returnValue;
 }
 function canBuyUpgrade(name){
-  return game.currency.gte(getUpgradeCost(name));
+  return game.currency.neq(ExpantaNum.ZERO)&&game.currency.gte(getUpgradeCost(name));
 }
 function buyUpgrade(event){
   var name;
   if (typeof event=="string") name=event;
   else name=event.srcElement.id.substring(0,event.srcElement.id.length-3);
   if (canBuyUpgrade(name)){
-    game.currency=game.currency.sub(getUpgradeCost(name));
+    var cost=getUpgradeCost(name);
+    if (game.upgrades[name].eq(game.upgrades[name].add(ExpantaNum.ONE))) return;
+    if (game.currency.eq(cost)&&game.currency.gte(ExpantaNum.E_MAX_SAFE_INTEGER)) game.currency=game.currency.div(ExpantaNum.MAX_SAFE_INTEGER).div(ExpantaNum.TWO);
+    else game.currency=game.currency.sub(cost);
     game.upgrades[name]=game.upgrades[name].add(ExpantaNum.ONE);
     removeMaxUpgradeAmountCache();
     removeUpgradeCostCache([name]);
@@ -548,6 +607,8 @@ function buyUpgrade(event){
     if (name=="cheaperUpgrades5"||name=="cheaperUpgrades"&&game.upgrades.cheaperUpgrades5.gte(ExpantaNum.ONE)) removeUpgradeCostCache(["strongerGenerators5","strongerGenerators6","strongerGenerators7"]);
     if (name=="cheaperUpgrades2") removeUpgradeCostCache(["strongerGenerators7"]);
     if (name=="cheaperUpgrades6") removeUpgradeCostCache(["strongerGenerators14","strongerGenerators15","strongerGenerators16"]);
+    if (name=="cheaperUpgrades7") removeUpgradeCostCache(["cheaperUpgrades4"]);
+    if (name=="cheaperUpgrades8") removeUpgradeCostCache(["strongerGenerators19"]);
     if (name=="cheaperUpgrades3"||name=="cheaperUpgrades4") removeUpgradeCostCache(["strongerGenerators","strongerGenerators2","strongerGenerators3","strongerGenerators4","cheaperUpgrades","strongerGenerators5","strongerGenerators6","strongerGenerators7","cheaperUpgrades2","strongerGenerators8","strongerGenerators9","strongerGenerators10"]);
   }
 }
@@ -557,7 +618,10 @@ function buyMaxUpgrade(event){
   else name=event.srcElement.id.substring(0,event.srcElement.id.length-3);
   if (canBuyUpgrade(name)){
     var amount=getMaxUpgradeAmount(name);
-    game.currency=game.currency.sub(getMaxUpgradeCost(name));
+    var cost=getMaxUpgradeCost(name);
+    if (game.upgrades[name].eq(game.upgrades[name].add(amount))) return;
+    if (game.currency.eq(cost)&&game.currency.gte(ExpantaNum.E_MAX_SAFE_INTEGER)) game.currency=game.currency.div(ExpantaNum.MAX_SAFE_INTEGER).div(ExpantaNum.TWO);
+    else game.currency=game.currency.sub(cost);
     game.upgrades[name]=game.upgrades[name].add(amount);
     removeMaxUpgradeAmountCache();
     removeUpgradeCostCache([name]);
@@ -565,17 +629,19 @@ function buyMaxUpgrade(event){
     if (name=="cheaperUpgrades5"||name=="cheaperUpgrades"&&game.upgrades.cheaperUpgrades5.gte(ExpantaNum.ONE)) removeUpgradeCostCache(["strongerGenerators5","strongerGenerators6","strongerGenerators7"]);
     if (name=="cheaperUpgrades2") removeUpgradeCostCache(["strongerGenerators7"]);
     if (name=="cheaperUpgrades6") removeUpgradeCostCache(["strongerGenerators14","strongerGenerators15","strongerGenerators16"]);
+    if (name=="cheaperUpgrades7") removeUpgradeCostCache(["cheaperUpgrades4"]);
+    if (name=="cheaperUpgrades8") removeUpgradeCostCache(["strongerGenerators19"]);
     if (name=="cheaperUpgrades3"||name=="cheaperUpgrades4") removeUpgradeCostCache(["strongerGenerators","strongerGenerators2","strongerGenerators3","strongerGenerators4","cheaperUpgrades","strongerGenerators5","strongerGenerators6","strongerGenerators7","cheaperUpgrades2","strongerGenerators8","strongerGenerators9","strongerGenerators10"]);
   }
 }
 function autoBuy(){
-  if (game.upgrades.autoBuy.gte(ExpantaNum.ONE)){
+  if (game.upgrades.autoBuy.eq(ExpantaNum.ONE)){
     buyMaxUpgrade("strongerGenerators");
     buyMaxUpgrade("strongerGenerators2");
     buyMaxUpgrade("strongerGenerators3");
     buyMaxUpgrade("strongerGenerators4");
   }
-  if (game.upgrades.autoBuy2.gte(ExpantaNum.ONE)){
+  if (game.upgrades.autoBuy2.eq(ExpantaNum.ONE)){
     buyMaxUpgrade("cheaperUpgrades");
     buyMaxUpgrade("strongerGenerators5");
     buyMaxUpgrade("strongerGenerators6");
@@ -586,6 +652,14 @@ function autoBuy(){
     buyMaxUpgrade("strongerGenerators10");
     buyMaxUpgrade("cheaperUpgrades3");
   }
+    if (getCurrencyPerSecond().isNaN()) debugger;
+}
+function toggleAutoBuy(event){
+  var name;
+  if (typeof event=="string") name=event;
+  else name=event.srcElement.id.substring(0,event.srcElement.id.length-6);
+  if (game.upgrades[name].eq(ExpantaNum.ONE)) game.upgrades[name]=ExpantaNum.TWO.clone();
+  else game.upgrades[name]=ExpantaNum.ONE.clone();
 }
 function N(x){
   var r=x.toPrecision(6,true);
@@ -614,22 +688,33 @@ function showIf(s,f){
     }
   }
 }
+var currentScreen;
 function updateDisplay(){
+  updateDisplayTop();
+  if (currentScreen=="main") updateDisplayMain();
+  else if (currentScreen=="upgrades") updateDisplayUpgrades();
+  updateDisplayTopEnd();
+}
+function updateDisplayTop(){
   dg("currency").innerHTML=N(game.currency);
   dg("currencyPerSecond").innerHTML=N(getCurrencyPerSecond());
-  dg("generators").innerHTML=game.generators;
-  dg("generatorCost").innerHTML=getGeneratorCost();
-  if (game.generators.gt(ExpantaNum.ZERO)){
+  if (dg("tabs").classList.contains("hidden")&&game.generators.gt(ExpantaNum.ZERO)){
     dg("buyGenerator").classList.add("unavailable");
     dg("tabs").classList.remove("hidden");
   }
+}
+function updateDisplayMain(){
+  dg("generators").innerHTML=game.generators;
+  dg("generatorCost").innerHTML=getGeneratorCost();
+}
+function updateDisplayUpgrades(){
   for (var i in game.upgrades){
     if (game.upgrades.hasOwnProperty(i)){
       var factors=getUpgradeCostFactor(i);
       if (factors.type=="once"){
         dg(i+"Num").innerHTML=game.upgrades[i].eq(ExpantaNum.ZERO)?"not":"has";
       }else{
-        dg(i+"Num").innerHTML=game.upgrades[i];
+        dg(i+"Num").innerHTML=N(game.upgrades[i]);
       }
       dg(i+"Cost").innerHTML=N(getUpgradeCost(i));
       if (canBuyUpgrade(i)){
@@ -639,35 +724,48 @@ function updateDisplay(){
         dg(i+"Buy").classList.add("unavailable");
         if (factors.type!="once") dg(i+"Max").classList.add("unavailable");
       }
-      if (factors.type!="once") dg(i+"Max").innerHTML="Buy max ("+getMaxUpgradeAmount(i)+")";
+      if (factors.type!="once") dg(i+"Max").innerHTML="Buy max ("+N(getMaxUpgradeAmount(i))+")";
     }
   }
+  dg("strongerGeneratorsEff").innerHTML=N(ExpantaNum.pow(1.1,ExpantaNum.pow(1.05,game.upgrades.strongerGenerators17)).sub(ExpantaNum.ONE).mul(100));
   showIf("strongerGenerators2",function(){return game.upgrades.strongerGenerators.gte(7);});
+  dg("strongerGenerators2Eff").innerHTML=N(ExpantaNum.pow(1.15,ExpantaNum.pow(1.05,game.upgrades.strongerGenerators18)).sub(ExpantaNum.ONE).mul(100));
   showIf("strongerGenerators3",function(){return game.upgrades.strongerGenerators2.gte(ExpantaNum.ONE);});
-  dg("strongerGenerators3Eff").innerHTML=N(ExpantaNum.mul(30,ExpantaNum.pow(1.07,game.upgrades.strongerGenerators5)));
+  dg("strongerGenerators3Eff").innerHTML=N(ExpantaNum.pow(1.3,ExpantaNum.pow(1.07,game.upgrades.strongerGenerators5)).sub(ExpantaNum.ONE).mul(100));
   showIf("strongerGenerators4",function(){return game.upgrades.strongerGenerators3.gte(ExpantaNum.TWO);});
   showIf("cheaperUpgrades",function(){return game.upgrades.strongerGenerators4.gte(3);});
   showIf("strongerGenerators5",function(){return game.upgrades.cheaperUpgrades.gte(4);});
   showIf("strongerGenerators6",function(){return game.upgrades.strongerGenerators5.gte(4);});
+  dg("strongerGenerators6Eff").innerHTML=N(ExpantaNum.pow(1.4,ExpantaNum.pow(1.17,game.upgrades.strongerGenerators10.pow(ExpantaNum.pow(1.06,game.upgrades.strongerGenerators13)))).sub(ExpantaNum.ONE).mul(100));
   showIf("autoBuy",function(){return game.upgrades.strongerGenerators6.gte(2);});
+  showIf("autoBuyToggle",function(){return game.upgrades.autoBuy.gte(ExpantaNum.ONE);});
+  if (game.upgrades.autoBuy.eq(ExpantaNum.ONE)) dg("autoBuyToggle").innerHTML="Enabled";
+  else dg("autoBuyToggle").innerHTML="Disabled";
   showIf("strongerGenerators7",function(){return game.upgrades.strongerGenerators6.gte(9);});
   showIf(["cheaperUpgrades2","strongerGenerators8","strongerGenerators9","strongerGenerators10"],function(){return game.upgrades.strongerGenerators7.gte(8);});
-  dg("strongerGenerators6Eff").innerHTML=N(ExpantaNum.mul(40,ExpantaNum.pow(1.17,game.upgrades.strongerGenerators10.mul(ExpantaNum.pow(1.06,game.upgrades.strongerGenerators13)))));
   if (game.upgrades.strongerGenerators11.gte(ExpantaNum.ONE)){
-    dg("strongerGenerators9Eff").innerHTML=N(ExpantaNum.mul(150,ExpantaNum.pow(1.17,game.upgrades.strongerGenerators10.mul(ExpantaNum.pow(1.06,game.upgrades.strongerGenerators13)))));
+    dg("strongerGenerators9Eff").innerHTML=N(ExpantaNum.pow(2.5,ExpantaNum.pow(1.17,game.upgrades.strongerGenerators10.mul(ExpantaNum.pow(1.06,game.upgrades.strongerGenerators13)))).sub(ExpantaNum.ONE).mul(100));
   }
+  dg("strongerGenerators10Eff").innerHTML=N(ExpantaNum.pow(1.17,ExpantaNum.pow(1.06,game.upgrades.strongerGenerators13)).sub(ExpantaNum.ONE).mul(100));
   showIf("cheaperUpgrades3",function(){return game.upgrades.strongerGenerators10.gte(4);});
+  dg("cheaperUpgrades3Eff").innerHTML=N(ExpantaNum.pow(1.08,ExpantaNum.pow(1.5,game.upgrades.cheaperUpgrades4)).sub(ExpantaNum.ONE).mul(100));
   showIf("strongerGenerators11",function(){return game.upgrades.cheaperUpgrades3.gte(5);});
   showIf("strongerGenerators12",function(){return game.upgrades.strongerGenerators11.gte(ExpantaNum.ONE);});
-  showIf("autoBuy2",function(){return game.upgrades.strongerGenerators12.gte(6);});
-  showIf("strongerGenerators13",function(){return game.upgrades.autoBuy2.gte(ExpantaNum.ONE);});
-  dg("strongerGenerators10Eff").innerHTML=N(ExpantaNum.mul(17,ExpantaNum.pow(1.06,game.upgrades.strongerGenerators13)));
+  showIf(["autoBuy2","strongerGenerators13"],function(){return game.upgrades.strongerGenerators12.gte(6);});
+  showIf("autoBuy2Toggle",function(){return game.upgrades.autoBuy2.gte(ExpantaNum.ONE);});
+  if (game.upgrades.autoBuy2.eq(ExpantaNum.ONE)) dg("autoBuy2Toggle").innerHTML="Enabled";
+  else dg("autoBuy2Toggle").innerHTML="Disabled";
   showIf(["cheaperUpgrades4","cheaperUpgrades5"],function(){return game.upgrades.strongerGenerators13.gte(7);});
-  dg("cheaperUpgrades3Eff").innerHTML=N(ExpantaNum.mul(8,ExpantaNum.pow(1.5,game.upgrades.cheaperUpgrades4)));
   showIf("strongerGenerators14",function(){return game.upgrades.cheaperUpgrades5.gte(ExpantaNum.ONE);});
   showIf("strongerGenerators15",function(){return game.upgrades.strongerGenerators14.gte(8);});
   showIf("strongerGenerators16",function(){return game.upgrades.strongerGenerators15.gte(3);});
   showIf("cheaperUpgrades6",function(){return game.upgrades.strongerGenerators16.gte(7);});
+  showIf("strongerGenerators17",function(){return game.upgrades.cheaperUpgrades6.gte(6);});
+  showIf(["strongerGenerators18","cheaperUpgrades7"],function(){return game.upgrades.strongerGenerators17.gte(4);});
+  showIf("strongerGenerators19",function(){return game.upgrades.strongerGenerators17.gte(5);});
+  showIf("cheaperUpgrades8",function(){return game.upgrades.strongerGenerators18.gte(5);});
+}
+function updateDisplayTopEnd(){
   var time=new Date().getTime();
   framesInLastSecond.push(time);
   while (time-framesInLastSecond[0]>=1000) framesInLastSecond.shift();
@@ -691,6 +789,7 @@ function changeScreen(event){
     if (scrName==name) dg(scrName).classList.remove("hidden");
     else dg(scrName).classList.add("hidden");
   }
+  currentScreen=name;
 }
 var saveItemName="1g∞u";
 function save(){
@@ -730,6 +829,23 @@ function importSave(){
   JSON.parse(atob(s));
   localStorage.setItem(saveItemName,s);
   location.reload();
+}
+var changelogCache="";
+function seeChangelog(){
+  if (changelogCache) dg("saveArea").value=changelogCache;
+  var xhttp=new XMLHttpRequest();
+  xhttp.onreadystatechange=function (){
+    if (this.readyState==4&&this.status==200){
+      if (this.status==200){
+        dg("saveArea").value=this.responseText;
+        changelogCache=this.responseText;
+      }else{
+        dg("saveArea").value="Unable to get changelog";
+      }
+    }
+  };
+  xhttp.open("GET","./changelog.md",true);
+  xhttp.send();
 }
 window.onload=function (){
   for (var i in onclicks){

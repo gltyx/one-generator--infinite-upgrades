@@ -1,3 +1,13 @@
+# 0.1.7 - 2020/03/25
+* Added `sg17`, `sg18`, `cu7`, `sg19`, and `cu8`
+* Added toggling auto buyers
+* Added integrated changelog
+* Fixed percentage display of strengths of upgrades being logically wrong
+* Fixed being unable to buy anything if auto buyers are enabled and the number is extremely high, resulting currency and cost becoming always equal because of imprecision and instantly setting the currency to 0 by instead diving by twice the MAX_SAFE_INTEGER.
+* Fixed very slow scaling results in practically infinite loop
+* Disabled subtraction of currency when the amount to too small compared to amount bought
+* Fixed some bugs with buy max
+
 # 0.1.6 - 2020/03/24
 * Added `sg14`, `sg15`, `sg16`, and `cu6`
 * Added export/import save
