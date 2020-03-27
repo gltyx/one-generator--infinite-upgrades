@@ -1,3 +1,8 @@
+# 0.2.0 - 2020/03/27
+* Added (`upg::`) `sg20`, `cu9`, `ab3`, (`asc::`) `sg1`, `ab1`, and `ep1`
+* Added ascension
+* Added option to change the precision of numbers
+
 # 0.1.7 - 2020/03/25
 * Added `sg17`, `sg18`, `cu7`, `sg19`, and `cu8`
 * Added toggling auto buyers

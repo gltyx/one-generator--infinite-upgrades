@@ -5,7 +5,7 @@
     <script src="./script.js"></script>
     <style>
       * {
-        font-family: "Consolas", monospace;
+        font-family: "Consolas", "Courier New", Courier, monospace;
         max-height: 999999px;
       }
       .hidden {
@@ -19,17 +19,16 @@
   </head>
   <body>
     <h1>1 Generator--∞ Upgrades</h1>
-    <h2>Naruyoko--0.1.7</h2>
+    <h2>Naruyoko--0.2.0</h2>
     <p id="top">
       Currency: <span id="currency">0</span><br>
       Currency per second: <span id="currencyPerSecond">0</span><br>
+      <span id="ascensionPointsContainer" class="hidden">Ascension points: <span id="ascensionPoints">0</span><br></span>
       fps: <span id="fps">0</span><br>
       <span id="offline" class="hidden">Simulating <span id="offlinetime"></span>ms at <span id="offlinespeed"></span> speed</span>
     </p>
     <p id="tabs" class="hidden">
-      <button id="tabs.main" onclick="changeScreen(event)">Main</button>
-      <button id="tabs.upgrades" onclick="changeScreen(event)">Upgrades</button>
-      <button id="tabs.options" onclick="changeScreen(event)">Options</button>
+      <button id="tabs.main" onclick="changeScreen(event)">Main</button> <button id="tabs.upgrades" onclick="changeScreen(event)">Upgrades</button> <span id="ascensionButtonContainer"><button id="tabs.ascension" class="hidden" onclick="changeScreen(event)">Ascension</button></span> <button id="tabs.options" onclick="changeScreen(event)">Options</button>
     </p>
     <p id="main">
       Generators: <span id="generators">0</span><br>
@@ -66,13 +65,23 @@
       <span id="cheaperUpgrades7" class="hidden">cu7 cu4 cost scales 30% slower (<span id="cheaperUpgrades7Num">0</span> bought) for <span id="cheaperUpgrades7Cost">0</span> <button id="cheaperUpgrades7Buy" onclick="buyUpgrade(event)">Buy</button> <button id="cheaperUpgrades7Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
       <span id="strongerGenerators19" class="hidden">sg19 Make generators 900% stronger for sg19 bought^4 (<span id="strongerGenerators19Num">0</span> bought) for <span id="strongerGenerators19Cost">0</span> <button id="strongerGenerators19Buy" onclick="buyUpgrade(event)">Buy</button> <button id="strongerGenerators19Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
       <span id="cheaperUpgrades8" class="hidden">cu8 sg19 cost scales 30% slower (<span id="cheaperUpgrades8Num">not</span> bought) for <span id="cheaperUpgrades8Cost">0</span> <button id="cheaperUpgrades8Buy" onclick="buyUpgrade(event)">Buy</button><br></span>
+      <span id="strongerGenerators20" class="hidden">sg20 Make generators 1900% stronger for sg19 bought^2 for sg20 bought^3 (<span id="strongerGenerators20Num">0</span> bought) for <span id="strongerGenerators20Cost">0</span> <button id="strongerGenerators20Buy" onclick="buyUpgrade(event)">Buy</button> <button id="strongerGenerators20Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+      <span id="cheaperUpgrades9" class="hidden">cu9 Make cu8 effect sg10, sg12 and sg20 (<span id="cheaperUpgrades9Num">not</span> bought) for <span id="cheaperUpgrades9Cost">0</span> <button id="cheaperUpgrades9Buy" onclick="buyUpgrade(event)">Buy</button><br></span>
+      <span id="autoBuy3" class="hidden">ab3 Buy max sg13 <span id="autoBuy3Eff">once</span> per second (<span id="autoBuy3Num">not</span> bought) for <span id="autoBuy3Cost">0</span> <button id="autoBuy3Buy" onclick="buyUpgrade(event)">Buy</button> <button id="autoBuy3Toggle" class="hidden" onclick="toggleAutoBuy(event)">Enabled</button><br></span>
+      <span id="doAscensionContainer" class="hidden"><b>Ascension</b>: Requires 10^^20, removes all upgrades <button id="doAscension" onclick="ascension()">0 ascension points</button><br></span>
+    </p>
+    <p id="ascension">
+      <span id="ascension.strongerGenerators">sg1 Make generators 100% stronger (<span id="ascension.strongerGeneratorsNum">0</span> bought) for <span id="ascension.strongerGeneratorsCost">0</span> <button id="ascension.strongerGeneratorsBuy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.strongerGeneratorsMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+      <span id="ascension.autoBuy">ab1 upg::ab3 is 50% faster (<span id="ascension.autoBuyNum">0</span> bought) for <span id="ascension.autoBuyCost">0</span> <button id="ascension.autoBuyBuy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.autoBuyMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+      <span id="ascension.efficientPrestige">ep1 Ascension gives 100% more ascension points (<span id="ascension.efficientPrestigeNum">0</span> bought) for <span id="ascension.efficientPrestigeCost">0</span> <button id="ascension.efficientPrestigeBuy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.efficientPrestigeMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
     </p>
     <p id="options">
       <button onclick="save()">Manually save</button>
       <button onclick="wipe()">Wipe save</button>
       <button onclick="exportSave()">Export save</button>
       <button onclick="importSave()">Import save</button>
-      <button onclick="seeChangelog()">Changelog</button><br>
+      <button onclick="seeChangelog()">Changelog</button>
+      <input id="notationPlaces" oninput="changeNotationPlaces()" type="range" min=1 max=17 value=6> <span id="notationPlacesDisp">6</span><br>
       <textarea id="saveArea" style="width:calc(100% - 8px);height:100px;"></textarea>
     </p>
   </body>
