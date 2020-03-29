@@ -1,3 +1,11 @@
+# 0.2.1 - 2020/03/29
+* Added `asg2`
+* Added buy max all upgrades
+* Added ability to hide auto bought upgrades
+* Dropped "make" from upgrade text
+* Changed aliases for ascension upgrades
+* Buffed `asg1` and `aab1`
+
 # 0.2.0 - 2020/03/27
 * Added (`upg::`) `sg20`, `cu9`, `ab3`, (`asc::`) `sg1`, `ab1`, and `ep1`
 * Added ascension
