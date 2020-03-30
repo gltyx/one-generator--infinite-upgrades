@@ -19,7 +19,7 @@
   </head>
   <body>
     <h1>1 Generator--∞ Upgrades</h1>
-    <h2>Naruyoko--0.2.1</h2>
+    <h2>Naruyoko--0.2.2</h2>
     <p id="top">
       Currency: <span id="currency">0</span><br>
       Currency per second: <span id="currencyPerSecond">0</span><br>
@@ -41,7 +41,7 @@
       <span id="strongerGenerators2" class="hidden">sg2 Generators are <span id="strongerGenerators2Eff">15</span>% stronger (<span id="strongerGenerators2Num">0</span> bought) for <span id="strongerGenerators2Cost">0</span> <button id="strongerGenerators2Buy" onclick="buyUpgrade(event)">Buy</button> <button id="strongerGenerators2Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
       <span id="strongerGenerators3" class="hidden">sg3 Generators are <span id="strongerGenerators3Eff">30</span>% stronger (<span id="strongerGenerators3Num">0</span> bought) for <span id="strongerGenerators3Cost">0</span> <button id="strongerGenerators3Buy" onclick="buyUpgrade(event)">Buy</button> <button id="strongerGenerators3Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
       <span id="strongerGenerators4" class="hidden">sg4 Generators are 5% stronger for each sg3 bought (<span id="strongerGenerators4Num">0</span> bought) for <span id="strongerGenerators4Cost">0</span> <button id="strongerGenerators4Buy" onclick="buyUpgrade(event)">Buy</button> <button id="strongerGenerators4Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
-      <span id="cheaperUpgrades" class="hidden">cu1 Upgrades above are 5% cheaper (<span id="cheaperUpgradesNum">0</span> bought) for <span id="cheaperUpgradesCost">0</span> <button id="cheaperUpgradesBuy" onclick="buyUpgrade(event)">Buy</button> <button id="cheaperUpgradesMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+      <span id="cheaperUpgrades" class="hidden">cu1 Upgrades above are <span id="cheaperUpgradesEff">5</span>% cheaper (<span id="cheaperUpgradesNum">0</span> bought) for <span id="cheaperUpgradesCost">0</span> <button id="cheaperUpgradesBuy" onclick="buyUpgrade(event)">Buy</button> <button id="cheaperUpgradesMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
       <span id="strongerGenerators5" class="hidden">sg5 sg3 is 7% stronger (<span id="strongerGenerators5Num">0</span> bought) for <span id="strongerGenerators5Cost">0</span> <button id="strongerGenerators5Buy" onclick="buyUpgrade(event)">Buy</button> <button id="strongerGenerators5Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
       <span id="strongerGenerators6" class="hidden">sg6 Generators are <span id="strongerGenerators6Eff">40</span>% stronger (<span id="strongerGenerators6Num">0</span> bought) for <span id="strongerGenerators6Cost">0</span> <button id="strongerGenerators6Buy" onclick="buyUpgrade(event)">Buy</button> <button id="strongerGenerators6Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
       <span id="autoBuy" class="hidden">ab1 Buy max sg1-4 automatically (<span id="autoBuyNum">not</span> bought) for <span id="autoBuyCost">0</span> <button id="autoBuyBuy" onclick="buyUpgrade(event)">Buy</button> <button id="autoBuyToggle" class="hidden" onclick="toggleAutoBuy(event)">Enabled</button> <button id="autoBuyHide" class="hidden" onclick="toggleAutoBuyHide(event)">Shown</button><br></span>
@@ -76,10 +76,14 @@
       <span id="ascension.autoBuy" class="hidden">aab1 ab3 is 100% faster (<span id="ascension.autoBuyNum">0</span> bought) for <span id="ascension.autoBuyCost">0</span> <button id="ascension.autoBuyBuy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.autoBuyMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
       <span id="ascension.efficientPrestige" class="hidden">aep1 Ascension gives 100% more ascension points (<span id="ascension.efficientPrestigeNum">0</span> bought) for <span id="ascension.efficientPrestigeCost">0</span> <button id="ascension.efficientPrestigeBuy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.efficientPrestigeMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
       <span id="ascension.strongerGenerators2" class="hidden">asg2 sg1 is 1% stronger (<span id="ascension.strongerGenerators2Num">not</span> bought) for <span id="ascension.strongerGenerators2Cost">0</span> <button id="ascension.strongerGenerators2Buy" onclick="buyUpgrade(event)">Buy</button><br></span>
+      <span id="ascension.efficientPrestige2" class="hidden">aep2 Start ascension with 1e5^level currency (<span id="ascension.efficientPrestige2Num">0</span> bought) for <span id="ascension.efficientPrestige2Cost">0</span> <button id="ascension.efficientPrestige2Buy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.efficientPrestige2Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+      <span id="ascension.strongerGenerators3">asg3 Generators are 900% stronger (<span id="ascension.strongerGenerators3Num">0</span> bought) for <span id="ascension.strongerGenerators3Cost">0</span> <button id="ascension.strongerGenerators3Buy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.strongerGenerators3Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+      <span id="ascension.cheaperUpgrades">acu1 cu1 is 10% stronger (<span id="ascension.cheaperUpgradesNum">0</span> bought) for <span id="ascension.cheaperUpgradesCost">0</span> <button id="ascension.cheaperUpgradesBuy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.cheaperUpgradesMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+      <span id="ascension.efficientPrestige3" class="hidden">aep3 Ascension gives 200% more ascension points (<span id="ascension.efficientPrestige3Num">0</span> bought) for <span id="ascension.efficientPrestige3Cost">0</span> <button id="ascension.efficientPrestige3Buy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.efficientPrestige3Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
     </p>
     <p id="options">
       <button onclick="save()">Manually save</button>
-      <button onclick="wipe()">Wipe save</button>
+      <button id="wipeButton" onclick="wipe()">Wipe save</button>
       <button onclick="exportSave()">Export save</button>
       <button onclick="importSave()">Import save</button>
       <button onclick="seeChangelog()">Changelog</button>

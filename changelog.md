@@ -1,3 +1,8 @@
+# 0.2.2 - 2020/03/30
+* Added `aep2`, `asg3`, `acu1`, `aep3`
+* Changed cost scaling of `aab1` and `aep1`
+* Added confirmation for wipe save
+
 # 0.2.1 - 2020/03/29
 * Added `asg2`
 * Added buy max all upgrades
