@@ -19,7 +19,7 @@
   </head>
   <body>
     <h1>1 Generator--∞ Upgrades</h1>
-    <h2>Naruyoko--0.2.2</h2>
+    <h2>Naruyoko--0.2.3</h2>
     <p id="top">
       Currency: <span id="currency">0</span><br>
       Currency per second: <span id="currencyPerSecond">0</span><br>
@@ -72,14 +72,22 @@
       <span id="doAscensionContainer" class="hidden"><b>Ascension</b>: Requires 10^^20, removes all upgrades <button id="doAscension" onclick="ascension()">0 ascension points</button><br></span>
     </p>
     <p id="ascension">
+      <span id="ascensionMaxAllContainer" class="hidden"><button id="doAscensionQuick" onclick="ascension()">0 ascension points</button><br></span>
       <span id="ascension.strongerGenerators">asg1 Generators are 200% stronger (<span id="ascension.strongerGeneratorsNum">0</span> bought) for <span id="ascension.strongerGeneratorsCost">0</span> <button id="ascension.strongerGeneratorsBuy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.strongerGeneratorsMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
       <span id="ascension.autoBuy" class="hidden">aab1 ab3 is 100% faster (<span id="ascension.autoBuyNum">0</span> bought) for <span id="ascension.autoBuyCost">0</span> <button id="ascension.autoBuyBuy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.autoBuyMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
       <span id="ascension.efficientPrestige" class="hidden">aep1 Ascension gives 100% more ascension points (<span id="ascension.efficientPrestigeNum">0</span> bought) for <span id="ascension.efficientPrestigeCost">0</span> <button id="ascension.efficientPrestigeBuy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.efficientPrestigeMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
       <span id="ascension.strongerGenerators2" class="hidden">asg2 sg1 is 1% stronger (<span id="ascension.strongerGenerators2Num">not</span> bought) for <span id="ascension.strongerGenerators2Cost">0</span> <button id="ascension.strongerGenerators2Buy" onclick="buyUpgrade(event)">Buy</button><br></span>
       <span id="ascension.efficientPrestige2" class="hidden">aep2 Start ascension with 1e5^level currency (<span id="ascension.efficientPrestige2Num">0</span> bought) for <span id="ascension.efficientPrestige2Cost">0</span> <button id="ascension.efficientPrestige2Buy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.efficientPrestige2Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
-      <span id="ascension.strongerGenerators3">asg3 Generators are 900% stronger (<span id="ascension.strongerGenerators3Num">0</span> bought) for <span id="ascension.strongerGenerators3Cost">0</span> <button id="ascension.strongerGenerators3Buy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.strongerGenerators3Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
-      <span id="ascension.cheaperUpgrades">acu1 cu1 is 10% stronger (<span id="ascension.cheaperUpgradesNum">0</span> bought) for <span id="ascension.cheaperUpgradesCost">0</span> <button id="ascension.cheaperUpgradesBuy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.cheaperUpgradesMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+      <span id="ascension.strongerGenerators3" class="hidden">asg3 Generators are 900% stronger (<span id="ascension.strongerGenerators3Num">0</span> bought) for <span id="ascension.strongerGenerators3Cost">0</span> <button id="ascension.strongerGenerators3Buy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.strongerGenerators3Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+      <span id="ascension.cheaperUpgrades" class="hidden">acu1 cu1 is 10% stronger (<span id="ascension.cheaperUpgradesNum">0</span> bought) for <span id="ascension.cheaperUpgradesCost">0</span> <button id="ascension.cheaperUpgradesBuy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.cheaperUpgradesMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
       <span id="ascension.efficientPrestige3" class="hidden">aep3 Ascension gives 200% more ascension points (<span id="ascension.efficientPrestige3Num">0</span> bought) for <span id="ascension.efficientPrestige3Cost">0</span> <button id="ascension.efficientPrestige3Buy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.efficientPrestige3Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+      <span id="ascension.efficientPrestige4" class="hidden">aep4 Start ascension with ab1 (<span id="ascension.efficientPrestige4Num">not</span> bought) for <span id="ascension.efficientPrestige4Cost">0</span> <button id="ascension.efficientPrestige4Buy" onclick="buyUpgrade(event)">Buy</button><br></span>
+      <span id="ascension.strongerGenerators4" class="hidden">asg4 Generators are currency^0.1 times stronger (<span id="ascension.strongerGenerators4Num">0</span> bought) for <span id="ascension.strongerGenerators4Cost">0</span> <button id="ascension.strongerGenerators4Buy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.strongerGenerators4Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+      <span id="ascension.autoBuy2" class="hidden">aab2 Start ascension with ab2, buy max all normal upgrades, and add ascension button within ascension tab (<span id="ascension.autoBuy2Num">not</span> bought) for <span id="ascension.autoBuy2Cost">0</span> <button id="ascension.autoBuy2Buy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.autoBuy2Toggle" class="hidden" onclick="toggleAutoBuy(event)">Enabled</button><br></span>
+      <span id="ascension.cheaperUpgrades2" class="hidden">acu2 Upgrades above are 20% cheaper (<span id="ascension.cheaperUpgrades2Num">0</span> bought) for <span id="ascension.cheaperUpgrades2Cost">0</span> <button id="ascension.cheaperUpgrades2Buy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.cheaperUpgrades2Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+      <span id="ascension.autoBuy3" class="hidden">aab3 ab3 is 40% faster for each acu2 bought (<span id="ascension.autoBuy3Num">0</span> bought) for <span id="ascension.autoBuy3Cost">0</span> <button id="ascension.autoBuy3Buy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.autoBuy3Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+      <span id="ascension.efficientPrestige5" class="hidden">aep5 Ascension gives 15% more ascension points for each aep3 bought (<span id="ascension.efficientPrestige5Num">has</span> bought) for <span id="ascension.efficientPrestige5Cost">0</span> <button id="ascension.efficientPrestige5Buy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.efficientPrestige5Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+      <span id="ascension.autoBuy4" class="hidden">aab4 Buy max asg1, asg3-4, acu1-2, aab1, aab3, aep1-3 automatically (<span id="ascension.autoBuy4Num">not</span> bought) for <span id="ascension.autoBuy4Cost">0</span> <button id="ascension.autoBuy4Buy" onclick="buyUpgrade(event)">Buy</button> <button id="ascension.autoBuy4Toggle" class="hidden" onclick="toggleAutoBuy(event)">Enabled</button> <button id="ascension.autoBuy4Hide" class="hidden" onclick="toggleAutoBuyHide(event)">Shown</button><br></span>
     </p>
     <p id="options">
       <button onclick="save()">Manually save</button>
@@ -88,7 +96,7 @@
       <button onclick="importSave()">Import save</button>
       <button onclick="seeChangelog()">Changelog</button>
       <input id="notationPlaces" oninput="changeNotationPlaces()" type="range" min=1 max=17 value=6> <span id="notationPlacesDisp">6</span><br>
-      <textarea id="saveArea" style="width:calc(100% - 8px);height:100px;"></textarea>
+      <textarea id="saveArea" style="width:calc(100% - 8px);height:100px;">Note for people from March 2020 incremental tournament: This was an entry to incremental tournament held in March 2020. The version in which the submission closed was 0.2.3.&#13;&#10;Note to person who wants to mod this game for whatever reason: You are free to do so (see also LISENCE), as long as it is not named exactly as this (put something like +).</textarea>
     </p>
   </body>
 </html>
