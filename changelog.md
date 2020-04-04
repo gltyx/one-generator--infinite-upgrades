@@ -1,3 +1,7 @@
+# 0.2.4 - 2020/04/02
+* Added `aab5`, `aep6`, `aab6`, `acu3`, `aab7`, and `aep7`
+* Added an option to adjust the speed burning through the offline time
+
 # 0.2.3 - 2020/03/31
 * Added `aep4`, `asg4`, `aab2`, `acu2`, `aab3`, `aep5`, `aab4`
 * (Badly) fixed bug where currencies may briefly turn negative when buying max
