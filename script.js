@@ -1027,8 +1027,10 @@ function getAutoBuy3PerSecond(dt){
   if (cache.autoBuy3PerSecond) return cache.autoBuy3PerSecond;
   var r=ExpantaNum.TWO.pow(game.ascension.upgrades.autoBuy);
   r=r.mul(ExpantaNum.pow(1.4,game.ascension.upgrades.cheaperUpgrades2.mul(game.ascension.upgrades.autoBuy3)));
-  if (game.upgrades.autoBuy.eq(ExpantaNum.ONE)||game.ascension.upgrades.autoBuy2.eq(ExpantaNum.ONE)) r=r.mul(ExpantaNum.pow(game.upgrades.strongerGenerators.slog(),ExpantaNum.pow(1.1,game.ascension.upgrades.autoBuy5.mul(dt/100))));
-  else r=r.mul(ExpantaNum.pow(game.upgrades.strongerGenerators.slog(),0.1));
+  if (game.ascension.upgrades.autoBuy5.gt(ExpantaNum.ZERO)){
+    if (game.upgrades.autoBuy.eq(ExpantaNum.ONE)||game.ascension.upgrades.autoBuy2.eq(ExpantaNum.ONE)) r=r.mul(game.upgrades.strongerGenerators.slog().pow(ExpantaNum.pow(game.ascension.upgrades.autoBuy5.mul(0.1).add(ExpantaNum.ONE),dt/100)));
+    else r=r.mul(game.upgrades.strongerGenerators.slog().pow(ExpantaNum.mul(0.1,game.ascension.upgrades.autoBuy5)));
+  }
   cache.autoBuy3PerSecond=r;
   return r;
 }
@@ -1253,10 +1255,10 @@ function updateDisplayAscension(dt){
   showIf(["ascension.autoBuy4Toggle","ascension.autoBuy4Hide"],function(){return game.ascension.upgrades.autoBuy4.gte(ExpantaNum.ONE);});
   dg("ascension.autoBuy4Toggle").textContent=game.ascension.upgrades.autoBuy4.eq(ExpantaNum.ONE)?"Enabled":"Disabled";
   dg("ascension.autoBuy4Hide").textContent=game.hidden.ascension.autoBuy4?"Hidden":"Shown";
-  showIf("ascension.cheaperUpgrades3",function(){return game.ascension.upgrades.efficientPrestige6.gte(5);});
   showIf("ascension.autoBuy6",function(){return game.ascension.upgrades.efficientPrestige6.gte(30);});
   showIf("ascension.autoBuy6Toggle",function(){return game.ascension.upgrades.autoBuy6.gte(ExpantaNum.ONE);});
   dg("ascension.autoBuy6Toggle").textContent=game.ascension.upgrades.autoBuy6.eq(ExpantaNum.ONE)?"Enabled":"Disabled";
+  showIf("ascension.cheaperUpgrades3",function(){return game.ascension.upgrades.efficientPrestige6.gte(100);});
   showIf("ascension.autoBuy7",function(){return game.ascension.upgrades.efficientPrestige6.gte(400);});
   showIf(["ascension.autoBuy7Toggle","ascension.autoBuy7Hide"],function(){return game.ascension.upgrades.autoBuy7.gte(ExpantaNum.ONE);});
   dg("ascension.autoBuy7Toggle").textContent=game.ascension.upgrades.autoBuy7.eq(ExpantaNum.ONE)?"Enabled":"Disabled";

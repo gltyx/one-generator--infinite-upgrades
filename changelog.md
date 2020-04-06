@@ -1,3 +1,7 @@
+# 0.2.5 - 2020/04/06
+* Fixed `aab5` being applied before buying
+* Changed efficiency `aab5` formula
+
 # 0.2.4 - 2020/04/02
 * Added `aab5`, `aep6`, `aab6`, `acu3`, `aab7`, and `aep7`
 * Added an option to adjust the speed burning through the offline time
