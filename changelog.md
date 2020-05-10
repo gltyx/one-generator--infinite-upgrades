@@ -1,3 +1,7 @@
+# 0.2.6 - 2020/05/10
+* fps counter is slightly more detailed.
+* Slight optimizations.
+
 # 0.2.5 - 2020/04/06
 * Fixed `aab5` being applied before buying
 * Changed efficiency `aab5` formula
