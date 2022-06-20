@@ -1,0 +1,28 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "Roboto Mono", monospace;
+    font-size: 16px;
+    overflow-x: hidden;
+}
+
+main{
+    min-height: 100vh;
+}
+
+button{
+    font-family: "Roboto Mono", monospace;
+}
+
+.hidden {
+    display: none;
+}
+
+.unavailable {
+    color: red;
+    opacity: 0.7;
+}
