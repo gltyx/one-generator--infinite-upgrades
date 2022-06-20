@@ -1109,22 +1109,10 @@ function ascension() {
 }
 
 function N(x) {
-  if (game.options.notationPlaces == 17) return x.toString();
-  var r = x.toPrecision(game.options.notationPlaces, true);
-  for (var i = 0; i < r.length; i++) {
-    if ("0123456789.".indexOf(r[i]) != -1) {
-      for (var j = i + 1; j <= r.length; j++) {
-        if ("0123456789.".indexOf(r[j]) == -1 || j == r.length) {
-          var s = r.substring(i, j);
-          var n = String(Number(s));
-          r = r.substring(0, i) + n + r.substring(j);
-          i = i + n.length;
-          break;
-        }
-      }
-    }
-  }
-  return r;
+  if(x.isInfinite()) return "∞";
+  if(x.lt(10)) return x.toNumber().toLocaleString("en-US", {minimumFractionDigits: 1, maximumFractionDigits: 1});
+  if(x.lt(1e4)) return x.toNumber().toLocaleString("en-US", {minimumFractionDigits: 0, maximumFractionDigits: 0});
+  return x.toExponential(game.options.notationPlaces);
 }
 
 function showIf(s, f) {
