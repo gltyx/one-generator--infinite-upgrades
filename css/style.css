@@ -4,10 +4,23 @@
     box-sizing: border-box;
 }
 
+html, body{
+    max-width: 100%;
+    overflow-x: hidden;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    overscroll-behavior-y: contain;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
 body{
     font-family: "Roboto Mono", monospace;
     font-size: 16px;
-    overflow-x: hidden;
 }
 
 main{

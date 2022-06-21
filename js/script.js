@@ -1112,7 +1112,8 @@ function N(x) {
   if(x.isInfinite()) return "∞";
   if(x.lt(10)) return x.toNumber().toLocaleString("en-US", {minimumFractionDigits: 1, maximumFractionDigits: 1});
   if(x.lt(1e4)) return x.toNumber().toLocaleString("en-US", {minimumFractionDigits: 0, maximumFractionDigits: 0});
-  return x.toExponential(game.options.notationPlaces);
+  if(x.lt("eeeee10")) return x.toExponential(game.options.notationPlaces);
+  return `(10↑↑${x.array[1][1]})↑${x.array[0][1]}`;
 }
 
 function showIf(s, f) {

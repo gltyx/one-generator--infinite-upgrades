@@ -2,7 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <link rel="manifest" href="manifest.webmanifest" />
     
     <link rel="stylesheet" href="css/fonts.css"/>
     <link rel="stylesheet" href="css/variables.css"/>
@@ -10,9 +12,17 @@
     <link rel="stylesheet" href="css/footer.css"/>
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+
+    <!-- iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="1G∞U" />
+    <link rel="apple-touch-icon" href="icons/icon192.png" />
+    <meta name="theme-color" content="#e5f0ed" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     
-    <script src="./ExpantaNum.js"></script>
-    <script src="./script.js"></script>
+    <script src="./js/ExpantaNum.js"></script>
+    <script src="./js/script.js"></script>
+
 
     <title>1 Generator - ∞ Upgrades</title>
   </head>
@@ -105,11 +115,24 @@
         <textarea id="saveArea" style="width:calc(100% - 8px);height:100px;">Note for people from March 2020 incremental tournament: This was an entry to incremental tournament held in March 2020. The version in which the submission closed was 0.2.3.&#13;&#10;Note to person who wants to mod this game for whatever reason: You are free to do so (see also LISENCE), as long as it is not named exactly as this (put something like +).</textarea>
         Digits: <input id="notationPlaces" oninput="changeNotationPlaces()" type="range" min=1 max=17 value=6> <span id="notationPlacesDisp">6</span><br>
         Offline factor: <input id="offlineSpeedFactor" oninput="changeOfflineSpeedFactor()" type="range" min=0 max=12 value=9 step=0.1> <span id="offlineSpeedFactorDisp">9</span><br>
+      
+        <div id="install_app_info" style="display: none;">
+          <h4>Install the App!</h4>
+          <ul>
+            <li>Works on Windows (Chrome), Android and maybe MacOS and iOS</li>
+            <li>Simple installation</li>
+            <li>Native App-like experience</li>
+            <li>Works offline</li>
+          </ul>
+        </div>
       </p>
     </main>
     <footer>
-      <h2>Naruyoko - Vepro - 0.2.6</h2>
+      <small>Naruyoko - Vepro - 0.2.6</small>
       <p><span id="fps">0</span> FPS</p>
+      <button style="display: none;" id="install_app">Install App</button>
     </footer>
+    
+    <script src="./js/pwa.js"></script>
   </body>
 </html>
