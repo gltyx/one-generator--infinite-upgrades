@@ -16,7 +16,7 @@ function addPwaInstall() {
     });
 }
 
-if (true ||location.protocol === "https:" && window.isSecureContext) {
+if (location.protocol === "https:" && window.isSecureContext) {
     addEventListener("load", e => {
         if ("serviceWorker" in navigator) {
             navigator.serviceWorker.register("service-worker.js").then(registration => {
