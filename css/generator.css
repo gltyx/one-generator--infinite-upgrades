@@ -1,0 +1,10 @@
+p.generators{
+    text-align: center;
+    font-size: 150%;
+    font-weight: bold;
+    margin-top: 30vh;
+}
+
+p.generators button{
+    font-size: 100%;
+}

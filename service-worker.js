@@ -15,6 +15,7 @@ const assets = [
     "./css/variables.css",
     "./css/header.css",
     "./css/footer.css",
+    "./css/upgrades.css",
     "./css/style.css",
 
     "./js/ExpantaNum.js",
