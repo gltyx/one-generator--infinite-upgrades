@@ -38,17 +38,17 @@
       <p id="top">
         <span id="offline" class="hidden">Simulating <span id="offlinetime"></span>ms at <span id="offlinespeed"></span> speed</span>
       </p>
-      <p id="tabs" class="hidden">
+      <div id="tabs" class="hidden">
         <button id="tabs.main" onclick="changeScreen(event)">Main</button>
         <button id="tabs.upgrades" onclick="changeScreen(event)">Upgrades</button>
         <button id="tabs.ascension" class="hidden" onclick="changeScreen(event)">Ascension</button>
         <button id="tabs.options" onclick="changeScreen(event)">Options</button>
-      </p>
-      <p id="main" class="generators">
+      </div>
+      <div id="main" class="generators">
         Generators: <span id="generators">0</span><br>
         <button id="buyGenerator" onclick="buyGenerator()">Buy a generator<br/>&starf;<span id="generatorCost">0</span></button>
-      </p>
-      <p class="upgrades" id="upgrades">
+      </div>
+      <div class="upgrades" id="upgrades">
         <span id="upgradesMaxAllContainer" class="hidden"><button id="upgradesMaxAll" onclick="buyMaxAllUpgrade(event)">Buy max all</button><br></span>
         <span id="strongerGenerators"><b>SG1 Lv<span id="strongerGeneratorsNum">0</span></b>Generators are <span id="strongerGeneratorsEff">10</span>% stronger<br/><button id="strongerGeneratorsBuy" onclick="buyUpgrade(event)">&starf;<span id="strongerGeneratorsCost">0</span></button> <button id="strongerGeneratorsMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
         <span id="strongerGenerators2" class="hidden"><b>SG2 Lv<span id="strongerGenerators2Num">0</span></b> Generators are <span id="strongerGenerators2Eff">15</span>% stronger <br/> <button id="strongerGenerators2Buy" onclick="buyUpgrade(event)">&starf;<span id="strongerGenerators2Cost">0</span></button> <button id="strongerGenerators2Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
@@ -83,8 +83,8 @@
         <span id="cheaperUpgrades9" class="hidden"><b>CU9 (<span id="cheaperUpgrades9Num">not</span> bought)</b> CU8 affects SG10, SG12 and SG20  <br/><button id="cheaperUpgrades9Buy" onclick="buyUpgrade(event)"><span id="cheaperUpgrades9Cost">0</span></button><br></span>
         <span id="autoBuy3" class="hidden"><b>AB3 (<span id="autoBuy3Num">not</span> bought)</b> Buy max SG13 <span id="autoBuy3Eff">once</span> per second  <br/><button id="autoBuy3Buy" onclick="buyUpgrade(event)"><span id="autoBuy3Cost">0</span></button> <button id="autoBuy3Toggle" class="hidden" onclick="toggleAutoBuy(event)">Enabled</button><br></span>
         <span id="doAscensionContainer" class="hidden"><b>Ascension</b>Requires 10↑↑20, removes all upgrades <button id="doAscension" onclick="ascension()">0 ascension points</button><br></span>
-      </p>
-      <p class="upgrades" id="ascension">
+      </div>
+      <div class="upgrades" id="ascension">
         <span id="ascensionMaxAllContainer" class="hidden"><button id="doAscensionQuick" onclick="ascension()">&spades; 0 ascension points</button><br></span>
         <span id="ascension.strongerGenerators"><b>ASG1 Lv<span id="ascension.strongerGeneratorsNum">0</span></b> Generators are 200% stronger <br/><button id="ascension.strongerGeneratorsBuy" onclick="buyUpgrade(event)">&spades;<span id="ascension.strongerGeneratorsCost">0</span></button> <button id="ascension.strongerGeneratorsMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
         <span id="ascension.autoBuy" class="hidden"><b>AAB3 Lv<span id="ascension.autoBuyNum">0</span></b> AB3 is 100% faster <br/><button id="ascension.autoBuyBuy" onclick="buyUpgrade(event)">&spades;<span id="ascension.autoBuyCost">0</span></button> <button id="ascension.autoBuyMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
@@ -107,8 +107,8 @@
         <span id="ascension.cheaperUpgrades3" class="hidden"><b>ACU3 (<span id="ascension.cheaperUpgrades3Num">not</span> bought)</b> AB3 costs ee10  <br/><button id="ascension.cheaperUpgrades3Buy" onclick="buyUpgrade(event)">&spades;<span id="ascension.cheaperUpgrades3Cost">0</span></button><br></span>
         <span id="ascension.autoBuy7" class="hidden"><b>AAB7 (<span id="ascension.autoBuy7Num">not</span> bought)</b> Buy max aep5-6 and aAB5 automatically  <br/><button id="ascension.autoBuy7Buy" onclick="buyUpgrade(event)">&spades;<span id="ascension.autoBuy7Cost">0</span></button> <button id="ascension.autoBuy7Toggle" class="hidden" onclick="toggleAutoBuy(event)">Enabled</button> <button id="ascension.autoBuy7Hide" class="hidden" onclick="toggleAutoBuyHide(event)">Shown</button><br></span>
         <span id="ascension.efficientPrestige7" class="hidden"><b>AEP7 (<span id="ascension.efficientPrestige7Num">not</span> bought)</b> Continuously gain ascension points one ascension per second and aep6 is updated once per second  <br/><button id="ascension.efficientPrestige7Buy" onclick="buyUpgrade(event)">&spades;<span id="ascension.efficientPrestige7Cost">0</span></button><br></span>
-      </p>
-      <p id="options">
+      </div>
+      <div id="options">
         <button onclick="save()">Manually save</button>
         <button id="wipeButton" onclick="wipe()">Wipe save</button>
         <button onclick="exportSave()">Export save</button>
@@ -118,6 +118,12 @@
         Digits: <input id="notationPlaces" oninput="changeNotationPlaces()" type="range" min=1 max=17 value=6> <span id="notationPlacesDisp">6</span><br>
         Offline factor: <input id="offlineSpeedFactor" oninput="changeOfflineSpeedFactor()" type="range" min=0 max=12 value=9 step=0.1> <span id="offlineSpeedFactorDisp">9</span><br>
       
+        <h3>This a a Mod!</h3>
+        <p>
+          This is a modification of Naruyokos Game "1 Generator - Infinite Upgrades". You can
+          play the original <a href="https://naruyoko.github.io/one-generator--infinite-upgrades/">here</a>.
+        </p>
+
         <div id="install_app_info" style="display: none;">
           <h4>Install the App!</h4>
           <ul>
@@ -127,10 +133,10 @@
             <li>Works offline</li>
           </ul>
         </div>
-      </p>
+      </div>
     </main>
     <footer>
-      <small>Naruyoko - Vepro - 0.2.6_01</small>
+      <small>Naruyoko - VeproGames - 0.2.6_01</small>
       <p><span id="fps">0</span> FPS</p>
       <button style="display: none;" id="install_app">Install App</button>
     </footer>
