@@ -1,0 +1,22 @@
+p.upgrades > span b{
+    font-size: 125%;
+}
+
+p.upgrades > span b:first-child{
+    display: block;
+}
+
+p.upgrades > span{
+    display: block;
+    margin: 1em 0;
+    padding: 0.25rem;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+p.upgrades > span.hidden{
+    display: none;
+}
+
+p.upgrades > span button > span{
+    pointer-events: none;
+}

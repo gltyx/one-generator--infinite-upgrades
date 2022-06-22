@@ -25,10 +25,15 @@ body{
 
 main{
     min-height: 100vh;
+    padding: 0.5em;
 }
 
 button{
+    font-size: 16px;
     font-family: "Roboto Mono", monospace;
+    background-color: #ededed;
+    border: 1px solid black;
+    padding: 0.2em;
 }
 
 .hidden {
@@ -36,6 +41,7 @@ button{
 }
 
 .unavailable {
+    background-color: rgb(232, 186, 186);
     color: red;
-    opacity: 0.7;
+    filter: brightness(0.85);
 }

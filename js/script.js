@@ -1108,9 +1108,12 @@ function ascension() {
   return true;
 }
 
-function N(x) {
+function N(x, rounded = false) {
   if(x.isInfinite()) return "∞";
-  if(x.lt(10)) return x.toNumber().toLocaleString("en-US", {minimumFractionDigits: 1, maximumFractionDigits: 1});
+  if(x.lt(10)){
+    const prec = rounded ? 0 : 1;
+    return x.toNumber().toLocaleString("en-US", {minimumFractionDigits: prec, maximumFractionDigits: prec});
+  };
   if(x.lt(1e4)) return x.toNumber().toLocaleString("en-US", {minimumFractionDigits: 0, maximumFractionDigits: 0});
   if(x.lt("eeeee10")) return x.toExponential(game.options.notationPlaces);
   return `(10↑↑${x.array[1][1]})↑${x.array[0][1]}`;
@@ -1188,7 +1191,7 @@ function updateDisplayUpgradesFromNamespace(name) {
       dg(i + "Buy").classList.add("unavailable");
       if (factors.type != "once") dg(i + "Max").classList.add("unavailable");
     }
-    if (factors.type != "once") dg(i + "Max").textContent = "Buy max (" + N(getMaxUpgradeAmount(i)) + ")";
+    if (factors.type != "once") dg(i + "Max").textContent = "Buy Max (+" + N(getMaxUpgradeAmount(i), true) + ")";
   }
 }
 
