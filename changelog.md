@@ -1,3 +1,8 @@
+# 0.2.6_01 - 2022/06
+* New Design
+* Make Progressive Web App
+* Slight rebalancing
+
 # 0.2.6 - 2020/05/10
 * fps counter is slightly more detailed.
 * Slight optimizations.

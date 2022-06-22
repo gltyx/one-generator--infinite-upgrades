@@ -276,7 +276,7 @@ function getCurrencyPerSecond() {
   r = r.mul(ExpantaNum.pow(2.75, game.upgrades.strongerGenerators10.mul(game.upgrades.strongerGenerators16)));
   r = r.mul(ExpantaNum.pow(10, game.upgrades.strongerGenerators19.pow(5)));
   r = r.mul(ExpantaNum.pow(20, game.upgrades.strongerGenerators19.pow(ExpantaNum.TWO).mul(game.upgrades.strongerGenerators20.pow(4))));
-  r = r.mul(ExpantaNum.pow(3, game.ascension.upgrades.strongerGenerators));
+  r = r.mul(ExpantaNum.pow(7, game.ascension.upgrades.strongerGenerators));
   r = r.mul(ExpantaNum.pow(10, game.ascension.upgrades.strongerGenerators3));
   if (game.currency.gt(ExpantaNum.ONE)) r = r.mul(ExpantaNum.pow(game.currency, game.ascension.upgrades.strongerGenerators4.div(10)));
   return r;

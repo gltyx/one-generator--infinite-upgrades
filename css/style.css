@@ -57,7 +57,7 @@ button:active{
     filter: brightness(0.85);
 }
 
-p#tabs{
+div#tabs{
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
