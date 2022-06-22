@@ -56,3 +56,10 @@ button:active{
     color: red;
     filter: brightness(0.85);
 }
+
+p#tabs{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-bottom: 1em;
+}
