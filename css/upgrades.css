@@ -17,6 +17,10 @@ p.upgrades > span.hidden{
     display: none;
 }
 
+p.upgrades > span button{
+    min-width: 100px;
+}
+
 p.upgrades > span button > span{
     pointer-events: none;
 }
