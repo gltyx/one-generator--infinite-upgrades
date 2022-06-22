@@ -3,8 +3,14 @@ header{
     color: var(--color-body);
     box-shadow: 0 0 4px black;
 
+    position: sticky;
+    top: 0;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 1em;
+    flex-wrap: wrap;
+    padding: 0.3em 1em;
+
+    font-size: 120%;
 }

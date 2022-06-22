@@ -1114,7 +1114,7 @@ function N(x, rounded = false) {
     const prec = rounded ? 0 : 1;
     return x.toNumber().toLocaleString("en-US", {minimumFractionDigits: prec, maximumFractionDigits: prec});
   };
-  if(x.lt(1e4)) return x.toNumber().toLocaleString("en-US", {minimumFractionDigits: 0, maximumFractionDigits: 0});
+  if(x.lt(1e6)) return x.toNumber().toLocaleString("en-US", {minimumFractionDigits: 0, maximumFractionDigits: 0});
   if(x.lt("eeeee10")) return x.toExponential(game.options.notationPlaces);
   return `(10↑↑${x.array[1][1]})↑${x.array[0][1]}`;
 }
