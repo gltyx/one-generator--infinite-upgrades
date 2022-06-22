@@ -1180,7 +1180,7 @@ function updateDisplayUpgradesFromNamespace(name) {
       if (factors.type == "once") {
         dg(i + "Num").textContent = getUpgrade(i).eq(ExpantaNum.ZERO) ? "not" : "has";
       } else {
-        dg(i + "Num").textContent = N(getUpgrade(i));
+        dg(i + "Num").textContent = N(getUpgrade(i), true);
       }
     }
     if (firstFrame || updated.upgradeCost[i]) dg(i + "Cost").textContent = N(getUpgradeCost(i));
