@@ -1119,6 +1119,16 @@ function N(x, rounded = false) {
   return `(10↑↑${x.array[1][1]})↑${x.array[0][1]}`;
 }
 
+function formatTime(sec) {
+  // h:m:s:ms
+  // double binary negation ~~ acts like Math.floor
+  const times = [~~(sec / 60) % 60, ~~sec % 60];
+  if(sec >= 3600){
+    times.unshift(~~(sec / 3600))
+  }
+  return times.map(t => t.toString().padStart(2, "0")).join(":");
+}
+
 function showIf(s, f) {
   if (typeof s == "string") {
     if (dg(s).classList.contains("hidden") && f()) {
@@ -1415,8 +1425,8 @@ function updateDisplayTopEnd(dt) {
   dg("fps").textContent = ((framesInLastSecond.length - 1) / (time - framesInLastSecond[0]) * 1000).toPrecision(3);
   if (game.offlinetime > 0) {
     dg("offline").classList.remove("hidden");
-    dg("offlinetime").textContent = game.offlinetime;
-    dg("offlinespeed").textContent = offlineBoost.speed.toPrecision(6);
+    dg("offlinetime").textContent = formatTime(game.offlinetime / 1000);
+    dg("offlinespeed").textContent = offlineBoost.speed.toPrecision(3);
   } else {
     dg("offline").classList.add("hidden");
   }
