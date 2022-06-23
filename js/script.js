@@ -1244,7 +1244,7 @@ function updateDisplayUpgrades(dt) {
       return game.upgrades.strongerGenerators6.gte(9);
     });
     showIf(["cheaperUpgrades2", "strongerGenerators8", "strongerGenerators9", "strongerGenerators10"], function () {
-      return game.upgrades.strongerGenerators7.gte(8);
+      return game.upgrades.strongerGenerators7.gte(6);
     });
     showIf("cheaperUpgrades3", function () {
       return game.upgrades.strongerGenerators10.gte(4);
