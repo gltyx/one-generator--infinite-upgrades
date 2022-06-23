@@ -264,7 +264,7 @@ function getCurrencyPerSecond() {
   r = r.mul(ExpantaNum.pow(1.3, game.upgrades.strongerGenerators3.mul(ExpantaNum.pow(1.07, game.upgrades.strongerGenerators5))));
   r = r.mul(ExpantaNum.pow(1.05, game.upgrades.strongerGenerators3.mul(game.upgrades.strongerGenerators4)));
   r = r.mul(ExpantaNum.pow(1.4, game.upgrades.strongerGenerators6.mul(ExpantaNum.pow(1.17, game.upgrades.strongerGenerators10.mul(ExpantaNum.pow(1.06, game.upgrades.strongerGenerators13))))));
-  r = r.mul(ExpantaNum.pow(1.1, game.upgrades.strongerGenerators7.mul(ExpantaNum.pow(1.25, game.upgrades.strongerGenerators8))).pow(ExpantaNum.TWO));
+  r = r.mul(ExpantaNum.pow(1.3, game.upgrades.strongerGenerators7.mul(ExpantaNum.pow(1.25, game.upgrades.strongerGenerators8))));
   if (game.upgrades.strongerGenerators11.gte(ExpantaNum.ONE)) {
     r = r.mul(ExpantaNum.pow(2.5, game.upgrades.strongerGenerators9.mul(ExpantaNum.pow(1.17, game.upgrades.strongerGenerators10.mul(ExpantaNum.pow(1.06, game.upgrades.strongerGenerators13))))));
   } else {
