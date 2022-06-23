@@ -1,6 +1,6 @@
 header{
     background-color: var(--color-header);
-    color: var(--color-body);
+    color: var(--color-text);
     box-shadow: 0 0 4px black;
 
     position: sticky;
@@ -14,5 +14,5 @@ header{
 
     font-size: 120%;
 
-    z-index: 2;
+    z-index: 1;
 }
