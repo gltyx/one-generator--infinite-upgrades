@@ -1126,7 +1126,9 @@ function formatTime(sec) {
   if(sec >= 3600){
     times.unshift(~~(sec / 3600))
   }
-  return times.map(t => t.toString().padStart(2, "0")).join(":");
+  let result = times.map(t => t.toString().padStart(2, "0")).join(":");
+  result += `.${((sec % 1) * 1000).toFixed(0).padStart(3, "0")}`;
+  return result;
 }
 
 function showIf(s, f) {

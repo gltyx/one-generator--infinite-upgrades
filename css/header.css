@@ -13,4 +13,6 @@ header{
     padding: 0.3em 1em;
 
     font-size: 120%;
+
+    z-index: 2;
 }
