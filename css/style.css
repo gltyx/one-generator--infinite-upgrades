@@ -30,7 +30,7 @@ main{
 }
 
 button{
-    font-size: 16px;
+    font-size: 1em;
     font-family: "Roboto Mono", monospace;
     background-color: var(--color-button);
     color: var(--color-text);
@@ -92,4 +92,10 @@ div#offline {
     align-items: center;
 
     z-index: 2;
+}
+
+@media (orientation: portrait) and (min-width: 700px){
+    body{
+        font-size: 26px;
+    }
 }
