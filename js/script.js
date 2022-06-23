@@ -264,7 +264,7 @@ function getCurrencyPerSecond() {
   r = r.mul(ExpantaNum.pow(1.3, game.upgrades.strongerGenerators3.mul(ExpantaNum.pow(1.07, game.upgrades.strongerGenerators5))));
   r = r.mul(ExpantaNum.pow(1.05, game.upgrades.strongerGenerators3.mul(game.upgrades.strongerGenerators4)));
   r = r.mul(ExpantaNum.pow(1.4, game.upgrades.strongerGenerators6.mul(ExpantaNum.pow(1.17, game.upgrades.strongerGenerators10.mul(ExpantaNum.pow(1.06, game.upgrades.strongerGenerators13))))));
-  r = r.mul(ExpantaNum.pow(1.1, game.upgrades.strongerGenerators7.mul(ExpantaNum.pow(1.25, game.upgrades.strongerGenerators8))).pow(ExpantaNum.TWO));
+  r = r.mul(ExpantaNum.pow(1.3, game.upgrades.strongerGenerators7.mul(ExpantaNum.pow(1.25, game.upgrades.strongerGenerators8))));
   if (game.upgrades.strongerGenerators11.gte(ExpantaNum.ONE)) {
     r = r.mul(ExpantaNum.pow(2.5, game.upgrades.strongerGenerators9.mul(ExpantaNum.pow(1.17, game.upgrades.strongerGenerators10.mul(ExpantaNum.pow(1.06, game.upgrades.strongerGenerators13))))));
   } else {
@@ -1119,6 +1119,18 @@ function N(x, rounded = false) {
   return `(10↑↑${x.array[1][1]})↑${x.array[0][1]}`;
 }
 
+function formatTime(sec) {
+  // h:m:s:ms
+  // double binary negation ~~ acts like Math.floor
+  const times = [~~(sec / 60) % 60, ~~sec % 60];
+  if(sec >= 3600){
+    times.unshift(~~(sec / 3600))
+  }
+  let result = times.map(t => t.toString().padStart(2, "0")).join(":");
+  result += `.${((sec % 1) * 1000).toFixed(0).padStart(3, "0")}`;
+  return result;
+}
+
 function showIf(s, f) {
   if (typeof s == "string") {
     if (dg(s).classList.contains("hidden") && f()) {
@@ -1232,7 +1244,7 @@ function updateDisplayUpgrades(dt) {
       return game.upgrades.strongerGenerators6.gte(9);
     });
     showIf(["cheaperUpgrades2", "strongerGenerators8", "strongerGenerators9", "strongerGenerators10"], function () {
-      return game.upgrades.strongerGenerators7.gte(8);
+      return game.upgrades.strongerGenerators7.gte(6);
     });
     showIf("cheaperUpgrades3", function () {
       return game.upgrades.strongerGenerators10.gte(4);
@@ -1415,8 +1427,8 @@ function updateDisplayTopEnd(dt) {
   dg("fps").textContent = ((framesInLastSecond.length - 1) / (time - framesInLastSecond[0]) * 1000).toPrecision(3);
   if (game.offlinetime > 0) {
     dg("offline").classList.remove("hidden");
-    dg("offlinetime").textContent = game.offlinetime;
-    dg("offlinespeed").textContent = offlineBoost.speed.toPrecision(6);
+    dg("offlinetime").textContent = formatTime(game.offlinetime / 1000);
+    dg("offlinespeed").textContent = offlineBoost.speed.toPrecision(3);
   } else {
     dg("offline").classList.add("hidden");
   }

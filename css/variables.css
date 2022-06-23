@@ -1,4 +1,15 @@
 :root{
     --color-header: rgb(43, 154, 121);
     --color-body: rgb(229, 240, 237);
+    --color-button: rgb(237, 237, 237);
+    --color-text: rgb(2, 2, 2);
+}
+
+@media(prefers-color-scheme: dark) {
+    :root{
+        --color-header: rgb(21, 64, 51);
+        --color-body: rgb(24, 33, 28);
+        --color-button: rgb(44, 72, 58);
+        --color-text: rgb(197, 197, 197);
+    }
 }

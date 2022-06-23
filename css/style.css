@@ -20,6 +20,8 @@ html, body{
 body{
     font-family: "Roboto Mono", monospace;
     font-size: 16px;
+    color: var(--color-text);
+    background-color: var(--color-body);
 }
 
 main{
@@ -28,22 +30,24 @@ main{
 }
 
 button{
-    font-size: 16px;
+    font-size: 1em;
     font-family: "Roboto Mono", monospace;
-    background-color: #ededed;
+    background-color: var(--color-button);
+    color: var(--color-text);
     border: 1px solid black;
     padding: 0.2em;
     border-radius: 3px;
+    cursor: pointer;
 
     transition: background-color 100ms, transform 200ms;
 }
 
-button:hover{
-    background-color: #cecece;
+button:hover:not(.unavailable){
+    filter: brightness(0.9);
 }
 
-button:active{
-    background-color: #b0b0b0;
+button:active:not(.unavailable){
+    filter: brightness(0.8);
     transform: scale(1.03);
 }
 
@@ -52,9 +56,14 @@ button:active{
 }
 
 .unavailable {
-    background-color: rgb(232, 186, 186);
-    color: red;
-    filter: brightness(0.85);
+    filter: brightness(0.55) opacity(0.8);
+    cursor: not-allowed;
+}
+
+textarea{
+    font-family: "Lucida Console", monospace;
+    color: var(--color-text);
+    background-color: var(--color-body);
 }
 
 div#tabs{
@@ -62,4 +71,31 @@ div#tabs{
     justify-content: space-evenly;
     flex-wrap: wrap;
     margin-bottom: 1em;
+}
+
+div#offline.hidden{
+    display: none;
+}
+
+div#offline {
+    background-color: #00000080;
+    color: white;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3em;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 2;
+}
+
+@media (orientation: portrait) and (min-width: 700px){
+    body{
+        font-size: 26px;
+    }
 }
