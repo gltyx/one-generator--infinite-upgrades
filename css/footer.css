@@ -1,0 +1,17 @@
+footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+
+    background-color: var(--color-header);
+    color: var(--color-text);
+    box-shadow: 0 0 -4px black;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0 1em;
+
+    z-index: 1;
+}

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <link rel="manifest" href="manifest.webmanifest" />
+    
+    <link rel="stylesheet" href="css/fonts.css"/>
+    <link rel="stylesheet" href="css/variables.css"/>
+    <link rel="stylesheet" href="css/header.css"/>
+    <link rel="stylesheet" href="css/footer.css"/>
+    <link rel="stylesheet" href="css/generator.css"/>
+    <link rel="stylesheet" href="css/upgrades.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+
+    <!-- iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="1G∞U" />
+    <link rel="apple-touch-icon" href="icons/icon192x192.png" />
+    <meta name="theme-color" content="#e5f0ed" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <script src="./js/ExpantaNum.js"></script>
+    <script src="./js/script.js"></script>
+
+
+    <title>1G∞U Vepro Mod</title>
+  </head>
+  <body>
+    <header>
+      <p>&starf;<span id="currency">0</span></p>
+      <p><span id="currencyPerSecond">0</span> &starf;/s</p>
+      <span id="ascensionPointsContainer" class="hidden">&spades;<span id="ascensionPoints">0</span><br></span>
+    </header>
+    <main>
+      <div id="offline" class="hidden">
+        <span>Simulating <span id="offlinetime"></span> at x<span id="offlinespeed"></span> speed</span>
+      </div>
+      <div id="tabs" class="hidden">
+        <button id="tabs.main" onclick="changeScreen(event)">Main</button>
+        <button id="tabs.upgrades" onclick="changeScreen(event)">Upgrades</button>
+        <button id="tabs.ascension" class="hidden" onclick="changeScreen(event)">Ascension</button>
+        <button id="tabs.options" onclick="changeScreen(event)">Options</button>
+      </div>
+      <div id="main" class="generators">
+        Generators: <span id="generators">0</span><br>
+        <button id="buyGenerator" onclick="buyGenerator()">Buy a generator<br/>&starf;<span id="generatorCost">0</span></button>
+      </div>
+      <div class="upgrades" id="upgrades">
+        <span id="upgradesMaxAllContainer" class="hidden"><button id="upgradesMaxAll" onclick="buyMaxAllUpgrade(event)">Buy max all</button><br></span>
+        <span id="strongerGenerators"><b>SG1 Lv<span id="strongerGeneratorsNum">0</span></b>Generators are <span id="strongerGeneratorsEff">10</span>% stronger<br/><button id="strongerGeneratorsBuy" onclick="buyUpgrade(event)">&starf;<span id="strongerGeneratorsCost">0</span></button> <button id="strongerGeneratorsMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="strongerGenerators2" class="hidden"><b>SG2 Lv<span id="strongerGenerators2Num">0</span></b> Generators are <span id="strongerGenerators2Eff">15</span>% stronger <br/> <button id="strongerGenerators2Buy" onclick="buyUpgrade(event)">&starf;<span id="strongerGenerators2Cost">0</span></button> <button id="strongerGenerators2Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="strongerGenerators3" class="hidden"><b>SG3 Lv<span id="strongerGenerators3Num">0</span></b> Generators are <span id="strongerGenerators3Eff">30</span>% stronger <br/> <button id="strongerGenerators3Buy" onclick="buyUpgrade(event)">&starf;<span id="strongerGenerators3Cost">0</span></button> <button id="strongerGenerators3Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="strongerGenerators4" class="hidden"><b>SG4 Lv<span id="strongerGenerators4Num">0</span></b> Generators are 5% stronger for each SG3 bought <br/><button id="strongerGenerators4Buy" onclick="buyUpgrade(event)">&starf;<span id="strongerGenerators4Cost">0</span></button> <button id="strongerGenerators4Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="cheaperUpgrades" class="hidden"><b>CU1 Lv<span id="cheaperUpgradesNum">0</span></b> Upgrades above are <span id="cheaperUpgradesEff">5</span>% cheaper <br/> <button id="cheaperUpgradesBuy" onclick="buyUpgrade(event)">&starf;<span id="cheaperUpgradesCost">0</span></button> <button id="cheaperUpgradesMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="strongerGenerators5" class="hidden"><b>SG5 Lv<span id="strongerGenerators5Num">0</span></b> SG3 is 7% stronger <br/><button id="strongerGenerators5Buy" onclick="buyUpgrade(event)">&starf;<span id="strongerGenerators5Cost">0</span></button> <button id="strongerGenerators5Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="strongerGenerators6" class="hidden"><b>SG6 Lv<span id="strongerGenerators6Num">0</span></b> Generators are <span id="strongerGenerators6Eff">40</span>% stronger<br/><button id="strongerGenerators6Buy" onclick="buyUpgrade(event)">&starf;<span id="strongerGenerators6Cost">0</span></button> <button id="strongerGenerators6Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="autoBuy" class="hidden"><b>AB1 (<span id="autoBuyNum">not</span> bought)</b> Buy max SG1-4 automatically  <button id="autoBuyBuy" onclick="buyUpgrade(event)">&starf;<span id="autoBuyCost">0</span></button> <button id="autoBuyToggle" class="hidden" onclick="toggleAutoBuy(event)">Enabled</button> <button id="autoBuyHide" class="hidden" onclick="toggleAutoBuyHide(event)">Shown</button><br></span>
+        <span id="strongerGenerators7" class="hidden"><b>SG7 Lv<span id="strongerGenerators7Num">0</span></b> Generators are 30% stronger<br/><button id="strongerGenerators7Buy" onclick="buyUpgrade(event)"><span id="strongerGenerators7Cost">0</span></button> <button id="strongerGenerators7Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="cheaperUpgrades2" class="hidden"><b>CU2 (<span id="cheaperUpgrades2Num">0</span> bought)</b> SG7 cost scales 10% slower  <br/><button id="cheaperUpgrades2Buy" onclick="buyUpgrade(event)"><span id="cheaperUpgrades2Cost">0</span></button> <button id="cheaperUpgrades2Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="strongerGenerators8" class="hidden"><b>SG8 Lv<span id="strongerGenerators8Num">0</span></b> SG7 act as there are 25% more of them <br/><button id="strongerGenerators8Buy" onclick="buyUpgrade(event)"><span id="strongerGenerators8Cost">0</span></button> <button id="strongerGenerators8Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="strongerGenerators9" class="hidden"><b>SG9 Lv<span id="strongerGenerators9Num">0</span></b> Generators are <span id="strongerGenerators9Eff">150</span>% stronger <br/><button id="strongerGenerators9Buy" onclick="buyUpgrade(event)"><span id="strongerGenerators9Cost">0</span></button> <button id="strongerGenerators9Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="strongerGenerators10" class="hidden"><b>SG10 Lv<span id="strongerGenerators10Num">0</span></b> SG6 is <span id="strongerGenerators10Eff">17</span>% stronger <br/><button id="strongerGenerators10Buy" onclick="buyUpgrade(event)"><span id="strongerGenerators10Cost">0</span></button> <button id="strongerGenerators10Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="cheaperUpgrades3" class="hidden"><b>CU3 Lv<span id="cheaperUpgrades3Num">0</span></b> Upgrades above are <span id="cheaperUpgrades3Eff">8</span>% cheaper <br/><button id="cheaperUpgrades3Buy" onclick="buyUpgrade(event)"><span id="cheaperUpgrades3Cost">0</span></button> <button id="cheaperUpgrades3Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="strongerGenerators11" class="hidden"><b>SG11 Lv<span id="strongerGenerators11Num">not</span></b> SG10 affects SG9 <br/><button id="strongerGenerators11Buy" onclick="buyUpgrade(event)"><span id="strongerGenerators11Cost">0</span></button><br></span>
+        <span id="strongerGenerators12" class="hidden"><b>SG12 Lv<span id="strongerGenerators12Num">0</span></b> Generators are 100% stronger for each log2<sub>SG8 bought</sub> for each log2<sub>SG9 bought</sub> <br/><button id="strongerGenerators12Buy" onclick="buyUpgrade(event)"><span id="strongerGenerators12Cost">0</span></button> <button id="strongerGenerators12Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="autoBuy2" class="hidden"><b>AB2 (<span id="autoBuy2Num">not</span> bought)</b> Buy max SG5-10 and CU1-3 automatically  <br/><button id="autoBuy2Buy" onclick="buyUpgrade(event)"><span id="autoBuy2Cost">0</span></button> <button id="autoBuy2Toggle" class="hidden" onclick="toggleAutoBuy(event)">Enabled</button> <button id="autoBuy2Hide" class="hidden" onclick="toggleAutoBuyHide(event)">Shown</button><br></span>
+        <span id="strongerGenerators13" class="hidden"><b>SG13 Lv<span id="strongerGenerators13Num">0</span></b> SG10 is 6% stronger <br/><button id="strongerGenerators13Buy" onclick="buyUpgrade(event)"><span id="strongerGenerators13Cost">0</span></button> <button id="strongerGenerators13Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="cheaperUpgrades4" class="hidden"><b>CU4 Lv<span id="cheaperUpgrades4Num">0</span></b> CU3 is 50% stronger <br/><button id="cheaperUpgrades4Buy" onclick="buyUpgrade(event)"><span id="cheaperUpgrades4Cost">0</span></button> <button id="cheaperUpgrades4Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="cheaperUpgrades5" class="hidden"><b>CU5 Lv<span id="cheaperUpgrades5Num">not</span></b> CU1 affects SG5-7 <br/><button id="cheaperUpgrades5Buy" onclick="buyUpgrade(event)"><span id="cheaperUpgrades5Cost">0</span></button><br></span>
+        <span id="strongerGenerators14" class="hidden"><b>SG14 Lv<span id="strongerGenerators14Num">0</span></b> Generators are 400% stronger <br/><button id="strongerGenerators14Buy" onclick="buyUpgrade(event)"><span id="strongerGenerators14Cost">0</span></button> <button id="strongerGenerators14Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="strongerGenerators15" class="hidden"><b>SG15 Lv<span id="strongerGenerators15Num">0</span></b> Generators are 4% stronger for square of SG14 bought <br/><button id="strongerGenerators15Buy" onclick="buyUpgrade(event)"><span id="strongerGenerators15Cost">0</span></button> <button id="strongerGenerators15Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="strongerGenerators16" class="hidden"><b>SG16 Lv<span id="strongerGenerators16Num">0</span></b> Generators are 175% stronger for each SG10 bought <br/><button id="strongerGenerators16Buy" onclick="buyUpgrade(event)"><span id="strongerGenerators16Cost">0</span></button> <button id="strongerGenerators16Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="cheaperUpgrades6" class="hidden"><b>CU6 Lv<span id="cheaperUpgrades6Num">0</span></b> SG14-16 cost scales 20% slower <br/><button id="cheaperUpgrades6Buy" onclick="buyUpgrade(event)"><span id="cheaperUpgrades6Cost">0</span></button> <button id="cheaperUpgrades6Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="strongerGenerators17" class="hidden"><b>SG17 Lv<span id="strongerGenerators17Num">0</span></b> SG1 is 5% stronger <br/><button id="strongerGenerators17Buy" onclick="buyUpgrade(event)"><span id="strongerGenerators17Cost">0</span></button> <button id="strongerGenerators17Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="strongerGenerators18" class="hidden"><b>SG18 Lv<span id="strongerGenerators18Num">0</span></b> SG2 is 5% stronger <br/><button id="strongerGenerators18Buy" onclick="buyUpgrade(event)"><span id="strongerGenerators18Cost">0</span></button> <button id="strongerGenerators18Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="cheaperUpgrades7" class="hidden"><b>CU7 Lv<span id="cheaperUpgrades7Num">0</span></b> CU4 cost scales 30% slower <br/><button id="cheaperUpgrades7Buy" onclick="buyUpgrade(event)"><span id="cheaperUpgrades7Cost">0</span></button> <button id="cheaperUpgrades7Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="strongerGenerators19" class="hidden"><b>SG19 Lv<span id="strongerGenerators19Num">0</span></b> Generators are 900% stronger for (SG19 bought)<sup>4</sup> <br/><button id="strongerGenerators19Buy" onclick="buyUpgrade(event)"><span id="strongerGenerators19Cost">0</span></button> <button id="strongerGenerators19Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="cheaperUpgrades8" class="hidden"><b>CU8 (<span id="cheaperUpgrades8Num">not</span> bought)</b> SG19 cost scales 30% slower  <br/><button id="cheaperUpgrades8Buy" onclick="buyUpgrade(event)"><span id="cheaperUpgrades8Cost">0</span></button><br></span>
+        <span id="strongerGenerators20" class="hidden"><b>SG20 <span id="strongerGenerators20Num">0</span></b> Generators are 1900% stronger for (SG19 bought)<sup>2</sup> for (SG20 bought)<sup>3</sup> <br/><button id="strongerGenerators20Buy" onclick="buyUpgrade(event)"><span id="strongerGenerators20Cost">0</span></button> <button id="strongerGenerators20Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="cheaperUpgrades9" class="hidden"><b>CU9 (<span id="cheaperUpgrades9Num">not</span> bought)</b> CU8 affects SG10, SG12 and SG20  <br/><button id="cheaperUpgrades9Buy" onclick="buyUpgrade(event)"><span id="cheaperUpgrades9Cost">0</span></button><br></span>
+        <span id="autoBuy3" class="hidden"><b>AB3 (<span id="autoBuy3Num">not</span> bought)</b> Buy max SG13 <span id="autoBuy3Eff">once</span> per second  <br/><button id="autoBuy3Buy" onclick="buyUpgrade(event)"><span id="autoBuy3Cost">0</span></button> <button id="autoBuy3Toggle" class="hidden" onclick="toggleAutoBuy(event)">Enabled</button><br></span>
+        <span id="doAscensionContainer" class="hidden"><b>Ascension</b>Requires 10↑↑20, removes all upgrades <button id="doAscension" onclick="ascension()">0 ascension points</button><br></span>
+      </div>
+      <div class="upgrades" id="ascension">
+        <span id="ascensionMaxAllContainer" class="hidden"><button id="doAscensionQuick" onclick="ascension()">&spades; 0 ascension points</button><br></span>
+        <span id="ascension.strongerGenerators"><b>ASG1 Lv<span id="ascension.strongerGeneratorsNum">0</span></b> Generators are 600% stronger <br/><button id="ascension.strongerGeneratorsBuy" onclick="buyUpgrade(event)">&spades;<span id="ascension.strongerGeneratorsCost">0</span></button> <button id="ascension.strongerGeneratorsMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="ascension.autoBuy" class="hidden"><b>AAB3 Lv<span id="ascension.autoBuyNum">0</span></b> AB3 is 100% faster <br/><button id="ascension.autoBuyBuy" onclick="buyUpgrade(event)">&spades;<span id="ascension.autoBuyCost">0</span></button> <button id="ascension.autoBuyMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="ascension.efficientPrestige" class="hidden"><b>AEP1 Lv<span id="ascension.efficientPrestigeNum">0</span></b> Ascension gives 100% more ascension points <br/><button id="ascension.efficientPrestigeBuy" onclick="buyUpgrade(event)">&spades;<span id="ascension.efficientPrestigeCost">0</span></button> <button id="ascension.efficientPrestigeMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="ascension.strongerGenerators2" class="hidden"><b>ASG2 (<span id="ascension.strongerGenerators2Num">not</span> bought)</b> SG1 is 1% stronger  <br/><button id="ascension.strongerGenerators2Buy" onclick="buyUpgrade(event)">&spades;<span id="ascension.strongerGenerators2Cost">0</span></button><br></span>
+        <span id="ascension.efficientPrestige2" class="hidden"><b>AEP2 Lv<span id="ascension.efficientPrestige2Num">0</span></b> Start ascension with 1e5^level currency <br/><button id="ascension.efficientPrestige2Buy" onclick="buyUpgrade(event)">&spades;<span id="ascension.efficientPrestige2Cost">0</span></button> <button id="ascension.efficientPrestige2Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="ascension.strongerGenerators3" class="hidden"><b>ASG3 Lv<span id="ascension.strongerGenerators3Num">0</span></b> Generators are 900% stronger <br/><button id="ascension.strongerGenerators3Buy" onclick="buyUpgrade(event)">&spades;<span id="ascension.strongerGenerators3Cost">0</span></button> <button id="ascension.strongerGenerators3Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="ascension.cheaperUpgrades" class="hidden"><b>ACU1 Lv<span id="ascension.cheaperUpgradesNum">0</span></b> CU1 is 10% stronger <br/><button id="ascension.cheaperUpgradesBuy" onclick="buyUpgrade(event)">&spades;<span id="ascension.cheaperUpgradesCost">0</span></button> <button id="ascension.cheaperUpgradesMax" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="ascension.efficientPrestige3" class="hidden"><b>AEP3 Lv<span id="ascension.efficientPrestige3Num">0</span></b> Ascension gives 200% more ascension points <br/><button id="ascension.efficientPrestige3Buy" onclick="buyUpgrade(event)">&spades;<span id="ascension.efficientPrestige3Cost">0</span></button> <button id="ascension.efficientPrestige3Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="ascension.efficientPrestige4" class="hidden"><b>AEP4 (<span id="ascension.efficientPrestige4Num">not</span> bought)</b> Start ascension with AB1  <br/><button id="ascension.efficientPrestige4Buy" onclick="buyUpgrade(event)">&spades;<span id="ascension.efficientPrestige4Cost">0</span></button><br></span>
+        <span id="ascension.strongerGenerators4" class="hidden"><b>ASG4 Lv<span id="ascension.strongerGenerators4Num">0</span></b> Generators are currency^0.1 times stronger <br/><button id="ascension.strongerGenerators4Buy" onclick="buyUpgrade(event)">&spades;<span id="ascension.strongerGenerators4Cost">0</span></button> <button id="ascension.strongerGenerators4Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="ascension.autoBuy2" class="hidden"><b>AAB2 (<span id="ascension.autoBuy2Num">not</span> bought)</b> Start ascension with AB2, buy max all normal upgrades, and add ascension button within ascension tab <br/><button id="ascension.autoBuy2Buy" onclick="buyUpgrade(event)">&spades;<span id="ascension.autoBuy2Cost">0</span></button> <button id="ascension.autoBuy2Toggle" class="hidden" onclick="toggleAutoBuy(event)">Enabled</button><br></span>
+        <span id="ascension.cheaperUpgrades2" class="hidden"><b>ACU2 Lv<span id="ascension.cheaperUpgrades2Num">0</span></b> Upgrades above are 20% cheaper <br/><button id="ascension.cheaperUpgrades2Buy" onclick="buyUpgrade(event)">&spades;<span id="ascension.cheaperUpgrades2Cost">0</span></button> <button id="ascension.cheaperUpgrades2Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="ascension.autoBuy3" class="hidden"><b>AAB3 Lv<span id="ascension.autoBuy3Num">0</span></b> AB3 is 40% faster for each ACU2 bought <br/><button id="ascension.autoBuy3Buy" onclick="buyUpgrade(event)">&spades;<span id="ascension.autoBuy3Cost">0</span></button> <button id="ascension.autoBuy3Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="ascension.efficientPrestige5" class="hidden"><b>AEP5 (<span id="ascension.efficientPrestige5Num">has</span> bought)</b> Ascension gives 15% more ascension points for each aep3 bought  <br/><button id="ascension.efficientPrestige5Buy" onclick="buyUpgrade(event)">&spades;<span id="ascension.efficientPrestige5Cost">0</span></button> <button id="ascension.efficientPrestige5Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="ascension.autoBuy4" class="hidden"><b>AAB4 (<span id="ascension.autoBuy4Num">not</span> bought)</b> Buy max ASG1, ASG3-4, ACU1-2, AAB1, AAB3, aep1-3 automatically  <br/><button id="ascension.autoBuy4Buy" onclick="buyUpgrade(event)">&spades;<span id="ascension.autoBuy4Cost">0</span></button> <button id="ascension.autoBuy4Toggle" class="hidden" onclick="toggleAutoBuy(event)">Enabled</button> <button id="ascension.autoBuy4Hide" class="hidden" onclick="toggleAutoBuyHide(event)">Shown</button><br></span>
+        <span id="ascension.autoBuy5" class="hidden"><b>AAB5 Lv<span id="ascension.autoBuy5Num">0</span></b> AB3 is slog(SG1 bought)^0.1 times faster, but SG1 can only be bought 10 times per second <br/><button id="ascension.autoBuy5Buy" onclick="buyUpgrade(event)">&spades;<span id="ascension.autoBuy5Cost">0</span></button> <button id="ascension.autoBuy5Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="ascension.efficientPrestige6" class="hidden"><b>AEP6 (<span id="ascension.efficientPrestige6Num">has</span> bought)</b> Ascension gives ascension points^0.05 more ascension points  <br/><button id="ascension.efficientPrestige6Buy" onclick="buyUpgrade(event)">&spades;<span id="ascension.efficientPrestige6Cost">0</span></button> <button id="ascension.efficientPrestige6Max" onclick="buyMaxUpgrade(event)">Buy max (0)</button><br></span>
+        <span id="ascension.autoBuy6" class="hidden"><b>AAB6 (<span id="ascension.autoBuy6Num">not</span> bought)</b> Ascend once per second automatically  <br/><button id="ascension.autoBuy6Buy" onclick="buyUpgrade(event)">&spades;<span id="ascension.autoBuy6Cost">0</span></button> <button id="ascension.autoBuy6Toggle" class="hidden" onclick="toggleAutoBuy(event)">Enabled</button><br></span>
+        <span id="ascension.cheaperUpgrades3" class="hidden"><b>ACU3 (<span id="ascension.cheaperUpgrades3Num">not</span> bought)</b> AB3 costs ee10  <br/><button id="ascension.cheaperUpgrades3Buy" onclick="buyUpgrade(event)">&spades;<span id="ascension.cheaperUpgrades3Cost">0</span></button><br></span>
+        <span id="ascension.autoBuy7" class="hidden"><b>AAB7 (<span id="ascension.autoBuy7Num">not</span> bought)</b> Buy max aep5-6 and aAB5 automatically  <br/><button id="ascension.autoBuy7Buy" onclick="buyUpgrade(event)">&spades;<span id="ascension.autoBuy7Cost">0</span></button> <button id="ascension.autoBuy7Toggle" class="hidden" onclick="toggleAutoBuy(event)">Enabled</button> <button id="ascension.autoBuy7Hide" class="hidden" onclick="toggleAutoBuyHide(event)">Shown</button><br></span>
+        <span id="ascension.efficientPrestige7" class="hidden"><b>AEP7 (<span id="ascension.efficientPrestige7Num">not</span> bought)</b> Continuously gain ascension points one ascension per second and aep6 is updated once per second  <br/><button id="ascension.efficientPrestige7Buy" onclick="buyUpgrade(event)">&spades;<span id="ascension.efficientPrestige7Cost">0</span></button><br></span>
+      </div>
+      <div id="options">
+        <button onclick="save()">Manually save</button>
+        <button id="wipeButton" onclick="wipe()">Wipe save</button>
+        <button onclick="exportSave()">Export save</button>
+        <button onclick="importSave()">Import save</button>
+        <button onclick="seeChangelog()">Changelog</button><br>
+        <textarea id="saveArea" style="width:calc(100% - 8px);height:100px;">Note for people from March 2020 incremental tournament: This was an entry to incremental tournament held in March 2020. The version in which the submission closed was 0.2.3.&#13;&#10;Note to person who wants to mod this game for whatever reason: You are free to do so (see also LISENCE), as long as it is not named exactly as this (put something like +).</textarea>
+        Digits: <input id="notationPlaces" oninput="changeNotationPlaces()" type="range" min=1 max=17 value=6> <span id="notationPlacesDisp">6</span><br>
+        Offline factor: <input id="offlineSpeedFactor" oninput="changeOfflineSpeedFactor()" type="range" min=0 max=12 value=9 step=0.1> <span id="offlineSpeedFactorDisp">9</span><br>
+      
+        <h3>This a a Mod!</h3>
+        <p>
+          This is a modification of Naruyokos Game "1 Generator - Infinite Upgrades". You can
+          play the original <a href="https://naruyoko.github.io/one-generator--infinite-upgrades/">here</a>.
+        </p>
+
+        <div id="install_app_info" style="display: none;">
+          <h4>Install the App!</h4>
+          <ul>
+            <li>Works on Windows (Chrome), Android and maybe MacOS and iOS</li>
+            <li>Simple installation</li>
+            <li>Native App-like experience</li>
+            <li>Works offline</li>
+          </ul>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <small>Naruyoko - VeproGames - 0.2.6_01</small>
+      <p><span id="fps">0</span> FPS</p>
+      <button style="display: none;" id="install_app">Install App</button>
+    </footer>
+    
+    <script src="./js/pwa.js"></script>
+  </body>
+</html>

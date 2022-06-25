@@ -1,0 +1,26 @@
+div.upgrades > span b{
+    font-size: 125%;
+}
+
+div.upgrades > span b:first-child{
+    display: block;
+}
+
+div.upgrades > span{
+    display: block;
+    margin: 1em 0;
+    padding: 0.25rem;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+div.upgrades > span.hidden{
+    display: none;
+}
+
+div.upgrades > span button{
+    min-width: 100px;
+}
+
+div.upgrades > span button > span{
+    pointer-events: none;
+}

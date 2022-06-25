@@ -1,0 +1,30 @@
+{
+    "name": "One Generator - Infinite Upgrades (Vepro Mod)",
+    "short_name": "1G∞U Vepro Mod",
+    "start_url": "index.html",
+    "display": "standalone",
+    "background_color": "#2b9a79",
+    "theme_color": "#e5f0ed",
+    "description": "There is only one Generator, and there's an infinite supply of upgrades",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "icon/icon192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "icon/icon192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icon/icon512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}

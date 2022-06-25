@@ -1,0 +1,18 @@
+header{
+    background-color: var(--color-header);
+    color: var(--color-text);
+    box-shadow: 0 0 4px black;
+
+    position: sticky;
+    top: 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0.3em 1em;
+
+    font-size: 120%;
+
+    z-index: 1;
+}
